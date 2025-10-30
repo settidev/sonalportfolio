@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photography Series Detail | Sonal Arya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+      html {
+        scroll-behavior: smooth;
+      }
+      /* Matching the requested theme: Black (#050505) and Red (#f87171) */
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #050505;
+        color: #e0e0e0;
+      }
+
+      /* Red accent for links */
+      .nav-link {
+        position: relative;
+        transition: color 0.3s ease;
+      }
+      .nav-link:hover {
+        color: #f87171;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 100%;
+        height: 2px;
+        background-color: #f87171;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+      .nav-link:hover::after {
+        transform: scaleX(1);
+      }
+
+      .section-fade {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .section-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Custom Grid Styling for Photography */
+      .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem; /* gap-6 */
+      }
+      .photo-item {
+        overflow: hidden;
+        background-color: #111;
+        border-radius: 0.75rem; /* rounded-xl */
+        box-shadow: 0 10px 20px rgba(248, 113, 113, 0.1); /* Soft red shadow */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .photo-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(248, 113, 113, 0.3); /* Enhanced red shadow on hover */
+      }
+      .photo-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+        /* Optional: Aspect ratio fix if all photos are same ratio. Otherwise, let content dictate height. */
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <!-- Navigation Bar (Sticky) - Consistent with other pages -->
+    <header
+      class="sticky top-0 z-50 bg-[#050505] bg-opacity-95 shadow-2xl backdrop-blur-sm border-b border-gray-900/50"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"
+      >
+        <a
+          href="#hero-section"
+          class="text-2xl font-black tracking-widest text-red-500 hover:text-red-400 transition transform hover:scale-[1.01]"
+        >
+          SONAL ARYA
+        </a>
+        <nav class="flex space-x-6">
+          <!-- Home Link -->
+          <a
+            href="index.html"
+            class="text-sm font-semibold text-red-500 transition duration-300 p-2 rounded-md bg-gray-900/50"
+            >Home</a
+          >
+
+          <!-- NEW FLAT LINKS (FORMERLY DROPDOWN) -->
+          <a
+            href="films.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Films (DOP)</a
+          >
+          <a
+            href="camer_training.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Camera Trainee</a
+          >
+
+          <!-- Flat Links -->
+          <a
+            href="filmphotography.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Film Photography</a
+          >
+          <a
+            href="index.html#contact"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Contact</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <!-- Series Introduction Section -->
+      <section class="section-fade section-visible mb-20">
+        <p class="text-xl font-light text-red-400 mb-2">
+          35mm & Medium Format Stills
+        </p>
+        <h1
+          class="text-5xl lg:text-7xl font-extrabold text-white mb-6 tracking-tighter"
+        >
+          The Night Shift Series
+        </h1>
+        <div
+          class="max-w-5xl text-gray-300 text-lg leading-relaxed border-l-4 border-red-500 pl-6 py-2"
+        >
+          <p>
+            This series explores the moody atmosphere and isolated beauty of
+            urban spaces after midnight. All images were captured on Portra 400
+            film, pushing the stock to its limit under available street light to
+            achieve a distinctive, grainy, and high-contrast look.
+          </p>
+          <div class="mt-4 text-base text-gray-400">
+            <span class="font-semibold text-red-300">Gear:</span> Leica M6,
+            Hasselblad 500C/M |
+            <span class="font-semibold text-red-300">Film:</span> Kodak Portra
+            400 (Pushed 1 stop)
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Photo Grid Section -->
+      <section id="photo-gallery" class="mt-12 section-fade">
+        <h2
+          class="text-4xl font-extrabold text-white mb-10 border-b border-gray-700 pb-4 text-red-400"
+        >
+          Selected Works
+        </h2>
+
+        <div class="photo-grid">
+          <!-- Mock Photos (Replace with your Google Drive embed links/direct image URLs) -->
+          <div class="photo-item">
+            <img
+              src="https://placehold.co/800x1200/121212/e0e0e0?text=Night+1"
+              alt="Urban Night Scene 1"
+            />
+          </div>
+          <div class="photo-item">
+            <img
+              src="https://placehold.co/1200x800/121212/e0e0e0?text=Street+Portrait"
+              alt="Urban Night Scene 2"
+            />
+          </div>
+          <div class="photo-item">
+            <img
+              src="https://placehold.co/800x1200/121212/e0e0e0?text=Alley+View"
+              alt="Urban Night Scene 3"
+            />
+          </div>
+          <div class="photo-item">
+            <img
+              src="https://placehold.co/1200x800/121212/e0e0e0?text=Rainy+Reflections"
+              alt="Urban Night Scene 4"
+            />
+          </div>
+          <div class="photo-item">
+            <img
+              src="https://placehold.co/800x1200/121212/e0e0e0?text=Car+Lights"
+              alt="Urban Night Scene 5"
+            />
+          </div>
+          <div class="photo-item">
+            <img
+              src="https://placehold.co/1200x800/121212/e0e0e0?text=Medium+Format+Detail"
+              alt="Urban Night Scene 6"
+            />
+          </div>
+          <div class="photo-item">
+            <img
+              src="https://placehold.co/800x1200/121212/e0e0e0?text=Neon+Sign"
+              alt="Urban Night Scene 7"
+            />
+          </div>
+          <div class="photo-item">
+            <img
+              src="https://placehold.co/1200x800/121212/e0e0e0?text=Monochrome+Shot"
+              alt="Urban Night Scene 8"
+            />
+          </div>
+          <div class="photo-item">
+            <img
+              src="https://placehold.co/800x1200/121212/e0e0e0?text=Final+Frame"
+              alt="Urban Night Scene 9"
+            />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-[#0f0f0f] py-6 mt-20 border-t border-gray-900">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600 text-sm"
+      >
+        &copy; 2025 Sonal Arya. Cinematography Portfolio.
+      </div>
+    </footer>
+
+    <!-- Script for fade-in effect (Consistent with other pages) -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("section-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      window.onload = function () {
+        document.querySelectorAll(".section-fade").forEach((section) => {
+          observer.observe(section);
+        });
+      };
+    </script>
+  </body>
+</html>

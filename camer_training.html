@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Camera Trainee | Sonal Arya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+      html {
+        scroll-behavior: smooth;
+      }
+      /* Matching the requested theme */
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #050505;
+        color: #e0e0e0;
+      }
+
+      /* Updated accent color for links: #f87171 (red-500) */
+      .nav-link {
+        position: relative;
+        transition: color 0.3s ease;
+      }
+      .nav-link:hover {
+        color: #f87171;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 100%;
+        height: 2px;
+        background-color: #f87171; /* Red accent for underline */
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+      .nav-link:hover::after {
+        transform: scaleX(1);
+      }
+      .section-fade {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .section-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <!-- Navigation Bar (Sticky) - Consistent with other pages -->
+    <header
+      class="sticky top-0 z-50 bg-[#050505] bg-opacity-95 shadow-2xl backdrop-blur-sm border-b border-gray-900/50"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"
+      >
+        <a
+          href="#hero-section"
+          class="text-2xl font-black tracking-widest text-red-500 hover:text-red-400 transition transform hover:scale-[1.01]"
+        >
+          SONAL ARYA
+        </a>
+        <nav class="flex space-x-6">
+          <!-- Home Link -->
+          <a
+            href="index.html"
+            class="text-sm font-semibold text-red-500 transition duration-300 p-2 rounded-md bg-gray-900/50"
+            >Home</a
+          >
+
+          <!-- NEW FLAT LINKS (FORMERLY DROPDOWN) -->
+          <a
+            href="films.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Films (DOP)</a
+          >
+          <a
+            href="camer_training.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Camera Trainee</a
+          >
+
+          <!-- Flat Links -->
+          <a
+            href="filmphotography.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Film Photography</a
+          >
+          <a
+            href="index.html#contact"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Contact</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <!-- SECTION: Name and Introductory Text -->
+      <section class="mb-20 section-fade section-visible">
+        <p class="text-xl font-light text-red-400 mb-2">
+          Practical Experience & Teamwork
+        </p>
+        <h1
+          class="text-6xl lg:text-7xl font-extrabold text-white tracking-tighter mb-6"
+        >
+          Camera Trainee Work
+        </h1>
+        <div class="max-w-4xl">
+          <p class="text-gray-300 text-lg leading-relaxed">
+            My time as a camera trainee provided essential hands-on experience
+            in the technical and logistical realities of a professional film
+            set. I focused on maintaining equipment integrity, assisting with
+            complex setups, and learning the indispensable discipline required
+            in the camera department. Below are two groups of visuals showcasing
+            key areas of responsibility.
+          </p>
+        </div>
+      </section>
+
+      <!-- NEW SINGLE SECTION FOR TWO PHOTOS (2-Column Grid) -->
+      <section class="mt-24 section-fade">
+        <h2
+          class="text-4xl font-extrabold text-white mb-10 border-b border-gray-700 pb-4 text-red-400"
+        >
+          On-Set and Technical Focus
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Photo 1: Technical/Prep Focus -->
+          <div
+            class="overflow-hidden rounded-xl shadow-xl shadow-red-900/20 transform hover:scale-[1.02] transition duration-500"
+          >
+            <a href="camera_training_detail.html">
+              <img
+                src="Camera Trainee/Different Shores/clapperboard 2.JPG"
+                alt="Trainee working on gear prep"
+                class="w-full h-auto object-cover aspect-[4/3]"
+              />
+            </a>
+            <div
+              class="p-4 bg-gray-900/70 text-base font-semibold text-red-300"
+            >
+              Different Shores
+            </div>
+          </div>
+
+          <!-- Photo 2: On-Set Collaboration Focus -->
+          <div
+            class="overflow-hidden rounded-xl shadow-xl shadow-red-900/20 transform hover:scale-[1.02] transition duration-500"
+          >
+            <a href="camera_training_detail_Wes.html">
+              <img
+                src="Camera Trainee/Western Super Mare/clapperboard eyes closed.jpg"
+                alt="Trainee assisting on set"
+                class="w-full h-auto object-cover aspect-[4/3]"
+              />
+            </a>
+            <div
+              class="p-4 bg-gray-900/70 text-base font-semibold text-red-300"
+            >
+              Western Super Mare
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-[#0f0f0f] py-6 mt-20 border-t border-gray-900">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600 text-sm"
+      >
+        &copy; 2025 Sonal Arya. Cinematography Portfolio.
+      </div>
+    </footer>
+
+    <!-- Script for fade-in effect (copied from film_detail.html) -->
+    <script>
+      // Intersection Observer for fade-in effect
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("section-visible");
+              // Stop observing once visible
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      // Initialize observation on load
+      window.onload = function () {
+        document.querySelectorAll(".section-fade").forEach((section) => {
+          observer.observe(section);
+        });
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Film Photography | Sonal Arya</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+      html {
+        scroll-behavior: smooth;
+      }
+      /* Matching the requested theme: Black (#050505) and Red (#f87171) */
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #050505;
+        color: #e0e0e0;
+      }
+
+      /* Base styling for tabs and links */
+      .nav-link {
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      /* Custom style for the photo grid items to ensure equal size */
+      .photo-item {
+        width: 100%;
+        padding-bottom: 100%; /* Creates a square container */
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      .photo-item img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .photo-item:hover img {
+        transform: scale(1.05);
+      }
+
+      /* Lightbox specific styles */
+      #lightbox-modal {
+        display: none; /* Controlled by JS */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 1000;
+        backdrop-filter: blur(8px);
+        align-items: center;
+        justify-content: center;
+      }
+
+      .lightbox-content {
+        max-width: 90vw;
+        max-height: 90vh;
+        width: auto;
+        height: auto;
+        position: relative;
+      }
+
+      .lightbox-image {
+        display: block;
+        max-width: 100%;
+        max-height: 80vh; /* Leave room for caption and controls */
+        object-fit: contain;
+      }
+      .lightbox-caption {
+        color: #f87171;
+        padding-top: 1rem;
+        text-align: center;
+        font-size: 1rem;
+      }
+      .nav-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        border: none;
+        color: white;
+        padding: 1rem;
+        cursor: pointer;
+        z-index: 10;
+        transition: background 0.2s;
+        border-radius: 9999px;
+      }
+      .nav-button:hover {
+        background: rgba(248, 113, 113, 0.7);
+      }
+      #prev-button {
+        left: 10px;
+      }
+      #next-button {
+        right: 10px;
+      }
+      #close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #f87171;
+        font-size: 2rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <!-- Navigation Bar (Sticky) -->
+    <header
+      class="sticky top-0 z-50 bg-[#050505] bg-opacity-95 shadow-2xl backdrop-blur-sm border-b border-gray-900/50"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"
+      >
+        <a
+          href="#hero-section"
+          class="text-2xl font-black tracking-widest text-red-500 hover:text-red-400 transition transform hover:scale-[1.01]"
+        >
+          SONAL ARYA
+        </a>
+        <nav class="flex space-x-6">
+          <!-- Home Link -->
+          <a
+            href="index.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Home</a
+          >
+
+          <!-- NEW FLAT LINKS (FORMERLY DROPDOWN) -->
+          <a
+            href="films.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Films (DOP)</a
+          >
+          <a
+            href="camer_training.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Camera Trainee</a
+          >
+
+          <!-- Highlight Current Page -->
+          <a
+            href="filmphotography.html"
+            class="text-sm font-semibold text-red-500 transition duration-300 p-2 rounded-md bg-gray-900/50"
+            >Film Photography</a
+          >
+          <a
+            href="index.html#contact"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Contact</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <!-- Introduction -->
+      <section class="mb-16 section-fade section-visible" id="intro">
+        <p class="text-xl font-light text-red-400 mb-2">
+          Analog and Digital Stills
+        </p>
+        <h1
+          class="text-6xl lg:text-7xl font-extrabold text-white tracking-tighter mb-6"
+        >
+          Curated Photography Collections
+        </h1>
+        <div class="max-w-4xl">
+          <p class="text-gray-300 text-lg leading-relaxed">
+            These images explore light, composition, and mood, reflecting the
+            same foundational principles I bring to motion picture
+            cinematography. Explore the collections below, spanning intimate
+            nature studies, commercial projects, and street photography from
+            around the world.
+          </p>
+        </div>
+      </section>
+
+      <!-- Photography Gallery Section -->
+      <section class="mt-24 section-fade">
+        <h2
+          class="text-4xl font-extrabold text-white mb-10 border-b border-gray-700 pb-4 text-red-400"
+        >
+          Collections
+        </h2>
+
+        <!-- Main Collection Tabs -->
+        <div
+          class="flex flex-wrap space-x-4 mb-8 border-b border-gray-800 pb-2"
+        >
+          <button
+            data-target="flora-fauna"
+            class="tab-button px-4 py-2 text-lg font-medium rounded-t-lg transition duration-200 text-red-400 border-b-2 border-red-500"
+          >
+            Flora and Fauna
+          </button>
+          <button
+            data-target="professional-photoshoot"
+            class="tab-button px-4 py-2 text-lg font-medium rounded-t-lg transition duration-200 hover:text-red-400 hover:border-red-500/50 text-gray-400 border-b-2 border-transparent"
+          >
+            Professional Photoshoot
+          </button>
+          <button
+            data-target="world-of-film-container"
+            class="tab-button px-4 py-2 text-lg font-medium rounded-t-lg transition duration-200 hover:text-red-400 hover:border-red-500/50 text-gray-400 border-b-2 border-transparent"
+          >
+            World of Film
+          </button>
+        </div>
+
+        <!-- World of Film Sub-Tabs Container (Hidden by default) -->
+        <div
+          id="world-of-film-container"
+          class="hidden flex flex-wrap space-x-3 mb-8 ml-4 border-b border-gray-800 pb-2"
+        >
+          <button
+            data-target="barcelona"
+            data-parent="world-of-film-container"
+            class="sub-tab-button px-3 py-1 text-sm font-regular rounded-full transition duration-200 bg-red-800/30 text-red-400"
+          >
+            Barcelona
+          </button>
+          <button
+            data-target="dubrovnik"
+            data-parent="world-of-film-container"
+            class="sub-tab-button px-3 py-1 text-sm font-regular rounded-full transition duration-200 hover:bg-gray-800/50 text-gray-400"
+          >
+            Dubrovnik
+          </button>
+          <button
+            data-target="paris"
+            data-parent="world-of-film-container"
+            class="sub-tab-button px-3 py-1 text-sm font-regular rounded-full transition duration-200 hover:bg-gray-800/50 text-gray-400"
+          >
+            Paris
+          </button>
+          <button
+            data-target="newcastle"
+            data-parent="world-of-film-container"
+            class="sub-tab-button px-3 py-1 text-sm font-regular rounded-full transition duration-200 hover:bg-gray-800/50 text-gray-400"
+          >
+            New Castle
+          </button>
+          <button
+            data-target="sitges"
+            data-parent="world-of-film-container"
+            class="sub-tab-button px-3 py-1 text-sm font-regular rounded-full transition duration-200 hover:bg-gray-800/50 text-gray-400"
+          >
+            Sitges
+          </button>
+        </div>
+
+        <!-- Gallery Content Area -->
+        <div id="gallery-content">
+          <!-- Flora and Fauna Collection (Default Visible) - 14 IMAGES -->
+          <div
+            data-collection="flora-fauna"
+            class="photo-grid grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
+          >
+            <!-- IMAGES START -->
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Flora and Fauna/000007.JPG"
+                alt="Flora and Fauna Image 1"
+                data-caption="Flora and Fauna, Image 000007"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Flora and Fauna/000020.JPG"
+                alt="Flora and Fauna Image 2"
+                data-caption="Flora and Fauna, Image 000020"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Flora and Fauna/000026.JPG"
+                alt="Flora and Fauna Image 3"
+                data-caption="Flora and Fauna, Image 000026"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Flora and Fauna/000040(1).JPG"
+                alt="Flora and Fauna Image 4"
+                data-caption="Flora and Fauna, Image 000040(1)"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Flora and Fauna/000044(1).JPG"
+                alt="Flora and Fauna Image 5"
+                data-caption="Flora and Fauna, Image 000044(1)"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Flora and Fauna/000044(2).JPG"
+                alt="Flora and Fauna Image 6"
+                data-caption="Flora and Fauna, Image 000044(2)"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Flora and Fauna/000047.JPG"
+                alt="Flora and Fauna Image 7"
+                data-caption="Flora and Fauna, Image 000047"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Flora and Fauna/000048(1).JPG"
+                alt="Flora and Fauna Image 8"
+                data-caption="Flora and Fauna, Image 000048(1)"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Flora and Fauna/000051.JPG"
+                alt="Flora and Fauna Image 9"
+                data-caption="Flora and Fauna, Image 000051"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Flora and Fauna/000052.JPG"
+                alt="Flora and Fauna Image 10"
+                data-caption="Flora and Fauna, Image 000052"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Flora and Fauna/000055.JPG"
+                alt="Flora and Fauna Image 11"
+                data-caption="Flora and Fauna, Image 000055"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Flora and Fauna/000056(1).JPG"
+                alt="Flora and Fauna Image 12"
+                data-caption="Flora and Fauna, Image 000056(1)"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Flora and Fauna/000057.JPG"
+                alt="Flora and Fauna Image 13"
+                data-caption="Flora and Fauna, Image 000057"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Flora and Fauna/000060.JPG"
+                alt="Flora and Fauna Image 14"
+                data-caption="Flora and Fauna, Image 000060"
+              />
+            </div>
+            <!-- IMAGES END -->
+          </div>
+
+          <!-- Professional Photoshoot Collection (Hidden by default) - 23 IMAGES -->
+          <div
+            data-collection="professional-photoshoot"
+            class="photo-grid grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 hidden"
+          >
+            <!-- IMAGES START -->
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000002 - Copy.JPG"
+                alt="Professional Photoshoot Image 1"
+                data-caption="Professional Photoshoot, Image 000002 - Copy"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000003.JPG"
+                alt="Professional Photoshoot Image 2"
+                data-caption="Professional Photoshoot, Image 000003"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000004.JPG"
+                alt="Professional Photoshoot Image 3"
+                data-caption="Professional Photoshoot, Image 000004"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000004(1).JPG"
+                alt="Professional Photoshoot Image 4"
+                data-caption="Professional Photoshoot, Image 000004(1)"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000005.JPG"
+                alt="Professional Photoshoot Image 5"
+                data-caption="Professional Photoshoot, Image 000005"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000006.JPG"
+                alt="Professional Photoshoot Image 6"
+                data-caption="Professional Photoshoot, Image 000006"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000006(1).JPG"
+                alt="Professional Photoshoot Image 7"
+                data-caption="Professional Photoshoot, Image 000006(1)"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000027(1).JPG"
+                alt="Professional Photoshoot Image 8"
+                data-caption="Professional Photoshoot, Image 000027(1)"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000030.JPG"
+                alt="Professional Photoshoot Image 9"
+                data-caption="Professional Photoshoot, Image 000030"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000032.JPG"
+                alt="Professional Photoshoot Image 10"
+                data-caption="Professional Photoshoot, Image 000032"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000040.JPG"
+                alt="Professional Photoshoot Image 11"
+                data-caption="Professional Photoshoot, Image 000040"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000041.JPG"
+                alt="Professional Photoshoot Image 12"
+                data-caption="Professional Photoshoot, Image 000041"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000042.JPG"
+                alt="Professional Photoshoot Image 13"
+                data-caption="Professional Photoshoot, Image 000042"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000044.JPG"
+                alt="Professional Photoshoot Image 14"
+                data-caption="Professional Photoshoot, Image 000044"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000045(1).JPG"
+                alt="Professional Photoshoot Image 15"
+                data-caption="Professional Photoshoot, Image 000045(1)"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000048.JPG"
+                alt="Professional Photoshoot Image 16"
+                data-caption="Professional Photoshoot, Image 000048"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000049.JPG"
+                alt="Professional Photoshoot Image 17"
+                data-caption="Professional Photoshoot, Image 000049"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000050.JPG"
+                alt="Professional Photoshoot Image 18"
+                data-caption="Professional Photoshoot, Image 000050"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000051(1).JPG"
+                alt="Professional Photoshoot Image 19"
+                data-caption="Professional Photoshoot, Image 000051(1)"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000052(1).JPG"
+                alt="Professional Photoshoot Image 20"
+                data-caption="Professional Photoshoot, Image 000052(1)"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000053.JPG"
+                alt="Professional Photoshoot Image 21"
+                data-caption="Professional Photoshoot, Image 000053"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000054.JPG"
+                alt="Professional Photoshoot Image 22"
+                data-caption="Professional Photoshoot, Image 000054"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/Professional Photoshoot/000056.JPG"
+                alt="Professional Photoshoot Image 23"
+                data-caption="Professional Photoshoot, Image 000056"
+              />
+            </div>
+            <!-- IMAGES END -->
+          </div>
+
+          <!-- World of Film Subcategories (Initial one visible, others hidden) -->
+          <!-- Barcelona (Default World of Film tab) - 4 IMAGES -->
+          <div
+            data-collection="barcelona"
+            class="photo-grid grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 hidden"
+          >
+            <!-- IMAGES START -->
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Barcelona/000005.JPG"
+                alt="Barcelona Image 1"
+                data-caption="Barcelona, Image 000005"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Barcelona/000038.JPG"
+                alt="Barcelona Image 2"
+                data-caption="Barcelona, Image 000038"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Barcelona/000043.JPG"
+                alt="Barcelona Image 3"
+                data-caption="Barcelona, Image 000043"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Barcelona/000044.JPG"
+                alt="Barcelona Image 4"
+                data-caption="Barcelona, Image 000044"
+              />
+            </div>
+            <!-- IMAGES END -->
+          </div>
+
+          <!-- Dubrovnik (Hidden) - 15 IMAGES -->
+          <div
+            data-collection="dubrovnik"
+            class="photo-grid grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 hidden"
+          >
+            <!-- IMAGES START -->
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Dubrovnik/000005.JPG"
+                alt="Dubrovnik Image 1"
+                data-caption="Dubrovnik, Image 000005"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Dubrovnik/000006.JPG"
+                alt="Dubrovnik Image 2"
+                data-caption="Dubrovnik, Image 000006"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Dubrovnik/000027.JPG"
+                alt="Dubrovnik Image 3"
+                data-caption="Dubrovnik, Image 000027"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Dubrovnik/000029.JPG"
+                alt="Dubrovnik Image 4"
+                data-caption="Dubrovnik, Image 000029"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Dubrovnik/000031.JPG"
+                alt="Dubrovnik Image 5"
+                data-caption="Dubrovnik, Image 000031"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Dubrovnik/000032.JPG"
+                alt="Dubrovnik Image 6"
+                data-caption="Dubrovnik, Image 000032"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Dubrovnik/000035.JPG"
+                alt="Dubrovnik Image 7"
+                data-caption="Dubrovnik, Image 000035"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Dubrovnik/000037.JPG"
+                alt="Dubrovnik Image 8"
+                data-caption="Dubrovnik, Image 000037"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Dubrovnik/000041.JPG"
+                alt="Dubrovnik Image 9"
+                data-caption="Dubrovnik, Image 000041"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Dubrovnik/000042.JPG"
+                alt="Dubrovnik Image 10"
+                data-caption="Dubrovnik, Image 000042"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Dubrovnik/000043.JPG"
+                alt="Dubrovnik Image 11"
+                data-caption="Dubrovnik, Image 000043"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Dubrovnik/000044.JPG"
+                alt="Dubrovnik Image 12"
+                data-caption="Dubrovnik, Image 000044"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Dubrovnik/000046.JPG"
+                alt="Dubrovnik Image 13"
+                data-caption="Dubrovnik, Image 000046"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Dubrovnik/000050.JPG"
+                alt="Dubrovnik Image 14"
+                data-caption="Dubrovnik, Image 000050"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Dubrovnik/000053.JPG"
+                alt="Dubrovnik Image 15"
+                data-caption="Dubrovnik, Image 000053"
+              />
+            </div>
+            <!-- IMAGES END -->
+          </div>
+
+          <!-- Paris (Hidden) - 12 IMAGES -->
+          <div
+            data-collection="paris"
+            class="photo-grid grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 hidden"
+          >
+            <!-- IMAGES START -->
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Paris/000004.JPG"
+                alt="Paris Image 1"
+                data-caption="Paris, Image 000004"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Paris/000005.JPG"
+                alt="Paris Image 2"
+                data-caption="Paris, Image 000005"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Paris/000040.JPG"
+                alt="Paris Image 3"
+                data-caption="Paris, Image 000040"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Paris/000046.JPG"
+                alt="Paris Image 4"
+                data-caption="Paris, Image 000046"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Paris/000054.JPG"
+                alt="Paris Image 5"
+                data-caption="Paris, Image 000054"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Paris/000057.JPG"
+                alt="Paris Image 6"
+                data-caption="Paris, Image 000057"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Paris/000059.JPG"
+                alt="Paris Image 7"
+                data-caption="Paris, Image 000059"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Paris/000061.JPG"
+                alt="Paris Image 8"
+                data-caption="Paris, Image 000061"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Paris/000062.JPG"
+                alt="Paris Image 9"
+                data-caption="Paris, Image 000062"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Paris/000066.JPG"
+                alt="Paris Image 10"
+                data-caption="Paris, Image 000066"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Paris/000067.JPG"
+                alt="Paris Image 11"
+                data-caption="Paris, Image 000067"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Paris/000071.JPG"
+                alt="Paris Image 12"
+                data-caption="Paris, Image 000071"
+              />
+            </div>
+            <!-- IMAGES END -->
+          </div>
+
+          <!-- New Castle (Hidden) - 2 IMAGES -->
+          <div
+            data-collection="newcastle"
+            class="photo-grid grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 hidden"
+          >
+            <!-- IMAGES START -->
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Newcastle/000034.JPG"
+                alt="New Castle Image 1"
+                data-caption="New Castle, Image 000034"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Newcastle/000033.JPG"
+                alt="New Castle Image 2"
+                data-caption="New Castle, Image 000033"
+              />
+            </div>
+            <!-- IMAGES END -->
+          </div>
+
+          <!-- Sitges (Hidden) - 3 IMAGES -->
+          <div
+            data-collection="sitges"
+            class="photo-grid grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 hidden"
+          >
+            <!-- IMAGES START -->
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Sitges/000059.JPG"
+                alt="Sitges Image 1"
+                data-caption="Sitges, Image 000059"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Sitges/000063.JPG"
+                alt="Sitges Image 2"
+                data-caption="Sitges, Image 000063"
+              />
+            </div>
+            <div class="photo-item rounded-lg shadow-lg" tabindex="0">
+              <img
+                src="Film Photography/The world in film/Sitges/000064.JPG"
+                alt="Sitges Image 3"
+                data-caption="Sitges, Image 000064"
+              />
+            </div>
+            <!-- IMAGES END -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Lightbox Modal Structure -->
+    <div id="lightbox-modal" onclick="closeLightbox()">
+      <div
+        class="lightbox-content relative"
+        onclick="event.stopPropagation()"
+        aria-modal="true"
+        role="dialog"
+      >
+        <!-- Image display -->
+        <img id="lightbox-image" class="lightbox-image" src="" alt="" />
+        <!-- Caption -->
+        <p id="lightbox-caption" class="lightbox-caption"></p>
+
+        <!-- Close Button -->
+        <span id="close-button" onclick="closeLightbox()" aria-label="Close"
+          >&#x2715;</span
+        >
+
+        <!-- Previous Button (Back Arrow) -->
+        <button
+          id="prev-button"
+          class="nav-button p-4 text-3xl hidden md:block"
+          onclick="navigate(-1)"
+          aria-label="Previous Image"
+        >
+          &#10094;
+        </button>
+        <!-- Next Button (Forward Arrow) -->
+        <button
+          id="next-button"
+          class="nav-button p-4 text-3xl hidden md:block"
+          onclick="navigate(1)"
+          aria-label="Next Image"
+        >
+          &#10095;
+        </button>
+      </div>
+    </div>
+    <!-- End Lightbox Modal -->
+
+    <footer class="bg-[#0f0f0f] py-6 mt-20 border-t border-gray-900">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600 text-sm"
+      >
+        &copy; 2025 Sonal Arya. Cinematography Portfolio.
+      </div>
+    </footer>
+
+    <!-- Script for Gallery Interactivity -->
+    <script>
+      let currentImages = []; // Array of currently visible image elements
+      let currentIndex = 0; // Index of the currently open image
+
+      // --- Lightbox Functions ---
+
+      function openLightbox(index) {
+        currentIndex = index;
+        const imgElement = currentImages[currentIndex].querySelector("img");
+        const modal = document.getElementById("lightbox-modal");
+        const lightboxImg = document.getElementById("lightbox-image");
+        const lightboxCaption = document.getElementById("lightbox-caption");
+
+        // Set image source and caption
+        lightboxImg.src = imgElement.src;
+        lightboxImg.alt = imgElement.alt;
+        lightboxCaption.textContent = imgElement.getAttribute("data-caption");
+
+        // Show modal and update history state (optional but good practice)
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden"; // Prevent background scrolling
+      }
+
+      function closeLightbox() {
+        document.getElementById("lightbox-modal").style.display = "none";
+        document.body.style.overflow = ""; // Restore background scrolling
+      }
+
+      function navigate(direction) {
+        let newIndex = currentIndex + direction;
+
+        if (newIndex < 0) {
+          newIndex = currentImages.length - 1; // Wrap around to the last image
+        } else if (newIndex >= currentImages.length) {
+          newIndex = 0; // Wrap around to the first image
+        }
+
+        openLightbox(newIndex);
+      }
+
+      // --- Tab and Gallery Functions ---
+
+      // Selectors for all collections
+      const collections = document.querySelectorAll("[data-collection]");
+      const mainTabButtons = document.querySelectorAll(".tab-button");
+      const subTabButtons = document.querySelectorAll(".sub-tab-button");
+      const worldOfFilmContainer = document.getElementById(
+        "world-of-film-container"
+      );
+
+      function updateGallery(collectionId) {
+        // 1. Hide all collections
+        collections.forEach((div) => div.classList.add("hidden"));
+
+        // 2. Show the selected collection
+        const targetCollection = document.querySelector(
+          `[data-collection="${collectionId}"]`
+        );
+        if (targetCollection) {
+          targetCollection.classList.remove("hidden");
+          // 3. Update the list of current images for lightbox navigation
+          currentImages = Array.from(
+            targetCollection.querySelectorAll(".photo-item")
+          );
+
+          // 4. Attach click listeners to new visible images
+          currentImages.forEach((item, index) => {
+            item.onclick = () => openLightbox(index);
+          });
+        }
+      }
+
+      function updateMainTabs(targetId) {
+        mainTabButtons.forEach((btn) => {
+          const isWorldOfFilm =
+            btn.getAttribute("data-target") === "world-of-film-container";
+          const isActive = btn.getAttribute("data-target") === targetId;
+
+          btn.classList.remove("text-red-400", "border-red-500");
+          btn.classList.add("text-gray-400", "border-transparent");
+          btn.classList.remove("hover:text-red-400", "hover:border-red-500/50");
+
+          if (isActive) {
+            btn.classList.add("text-red-400", "border-red-500");
+            worldOfFilmContainer.classList.remove("hidden"); // Ensure sub-tabs show if World of Film is main tab
+          } else if (isWorldOfFilm) {
+            // This case handles when a sub-tab is clicked, which calls updateMainTabs("world-of-film-container").
+            // If the current button is the World of Film button, but targetId is NOT the button's data-target
+            // then we need to check if the target is one of the cities. Since the sub-tab handler
+            // always calls with "world-of-film-container", we'll only check the direct active state.
+            // If the current button is World of Film and the target isn't (i.e. we are in the main tabs loop
+            // and checking this button vs. Flora/Professional as the target), we style it as inactive.
+            btn.classList.add("hover:text-red-400", "hover:border-red-500/50");
+          } else {
+            btn.classList.add("hover:text-red-400", "hover:border-red-500/50");
+            // Hide World of Film sub-tabs if another main tab is selected
+            if (!targetId.startsWith("world-of-film")) {
+              worldOfFilmContainer.classList.add("hidden");
+            }
+          }
+        });
+      }
+
+      function updateSubTabs(targetId) {
+        subTabButtons.forEach((btn) => {
+          btn.classList.remove("bg-red-800/30", "text-red-400");
+          btn.classList.add("hover:bg-gray-800/50", "text-gray-400");
+
+          if (btn.getAttribute("data-target") === targetId) {
+            btn.classList.add("bg-red-800/30", "text-red-400");
+            btn.classList.remove("hover:bg-gray-800/50", "text-gray-400");
+          }
+        });
+      }
+
+      // --- Event Listeners and Initialization ---
+
+      mainTabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const target = button.getAttribute("data-target");
+          if (target === "world-of-film-container") {
+            // World of Film Container clicked, default to first sub-tab (Barcelona)
+            updateMainTabs(target);
+            updateGallery("barcelona");
+            updateSubTabs("barcelona");
+          } else {
+            // ADDED: This ensures Flora and Professional tabs now switch views
+            updateMainTabs(target);
+            updateGallery(target);
+            worldOfFilmContainer.classList.add("hidden");
+          }
+        });
+      });
+
+      subTabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const target = button.getAttribute("data-target");
+          updateGallery(target);
+          updateSubTabs(target);
+          // Ensure main World of Film tab stays active
+          updateMainTabs("world-of-film-container");
+        });
+      });
+
+      // Escape key closes the lightbox
+      document.addEventListener("keydown", (e) => {
+        if (
+          e.key === "Escape" &&
+          document.getElementById("lightbox-modal").style.display === "flex"
+        ) {
+          closeLightbox();
+        }
+        if (
+          document.getElementById("lightbox-modal").style.display === "flex"
+        ) {
+          if (e.key === "ArrowLeft") {
+            navigate(-1);
+          } else if (e.key === "ArrowRight") {
+            navigate(1);
+          }
+        }
+      });
+
+      // Intersection Observer and Initial Load
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("section-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      window.onload = function () {
+        document.querySelectorAll(".section-fade").forEach((section) => {
+          observer.observe(section);
+        });
+
+        // Initialize the gallery to the first collection ("flora-fauna")
+        updateGallery("flora-fauna");
+
+        // Hide the sub-tabs container on initial load
+        worldOfFilmContainer.classList.add("hidden");
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Detail - Sonal Arya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom cinematic scrolling effects for specific elements */
+      html {
+        scroll-behavior: smooth;
+      }
+      /* Updated body background color to match the darker #050505 theme */
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #050505;
+        color: #e0e0e0;
+      }
+
+      /* Updated accent color for links: #f87171 (red-500) */
+      .nav-link {
+        position: relative;
+        transition: color 0.3s ease;
+      }
+      .nav-link:hover {
+        color: #f87171;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 100%;
+        height: 2px;
+        background-color: #f87171; /* Red accent for underline */
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+      .nav-link:hover::after {
+        transform: scaleX(1);
+      }
+
+      .dropdown-menu {
+        transition: all 0.3s ease-out;
+        transform: translateY(10px);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .dropdown:hover .dropdown-menu {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .section-fade {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .section-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .video-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        margin-top: 2rem;
+      }
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.75rem; /* rounded-xl */
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <!-- Navigation Bar (Sticky) -->
+    <header
+      class="sticky top-0 z-50 bg-[#050505] bg-opacity-95 shadow-2xl backdrop-blur-sm border-b border-gray-900/50"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"
+      >
+        <a
+          href="#hero-section"
+          class="text-2xl font-black tracking-widest text-red-500 hover:text-red-400 transition transform hover:scale-[1.01]"
+        >
+          SONAL ARYA
+        </a>
+        <nav class="flex space-x-6">
+          <!-- Home Link -->
+          <a
+            href="index.html"
+            class="text-sm font-semibold text-red-500 transition duration-300 p-2 rounded-md bg-gray-900/50"
+            >Home</a
+          >
+
+          <!-- NEW FLAT LINKS (FORMERLY DROPDOWN) -->
+          <a
+            href="films.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Films (DOP)</a
+          >
+          <a
+            href="camer_training.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Camera Trainee</a
+          >
+
+          <!-- Flat Links -->
+          <a
+            href="filmphotography.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Film Photography</a
+          >
+          <a
+            href="index.html#contact"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Contact</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <!-- Dynamic Content Section -->
+      <section id="project-details" class="section-fade">
+        <!-- Content will be injected here by JavaScript -->
+        <h1
+          class="text-5xl lg:text-7xl font-extrabold text-white mb-4 tracking-tighter"
+          id="film-title"
+        >
+          Loading...
+        </h1>
+        <p class="text-red-400 text-lg mb-12" id="film-role"></p>
+
+        <div class="lg:flex lg:space-x-12">
+          <!-- SECTION 1: POSTER & DETAILS -->
+          <div class="lg:w-1/3 mb-12 lg:mb-0">
+            <h2
+              class="text-3xl font-bold text-white mb-6 border-b border-gray-700 pb-2"
+            >
+              Film Poster
+            </h2>
+            <img
+              id="film-poster"
+              src=""
+              alt="Film Poster Placeholder"
+              class="w-full h-auto rounded-xl shadow-2xl object-cover transform hover:scale-[1.02] transition duration-500"
+            />
+
+            <div class="mt-8 p-6 bg-gray-800 rounded-xl shadow-inner">
+              <h3 class="text-xl font-semibold mb-4 text-red-400">
+                Project Details
+              </h3>
+              <div class="space-y-2 text-sm">
+                <p>
+                  <strong>Director:</strong> <span id="film-director"></span>
+                </p>
+                <p><strong>Genre:</strong> <span id="film-genre"></span></p>
+                <p><strong>Year:</strong> <span id="film-year"></span></p>
+                <p><strong>Format:</strong> <span id="film-format"></span></p>
+                <p>
+                  <strong>Awards:</strong>
+                  <span id="film-awards" class="italic text-gray-400"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: VIDEO EMBED & SYNOPSIS -->
+          <div class="lg:w-2/3">
+            <h2
+              class="text-3xl font-bold text-white mb-6 border-b border-gray-700 pb-2"
+            >
+              Film Video
+            </h2>
+            <div class="video-container shadow-2xl">
+              <!-- Video Embed will be placed here -->
+              <iframe
+                id="film-video-embed"
+                src=""
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+
+            <div class="mt-12">
+              <h3 class="text-2xl font-semibold text-red-400 mb-4">Synopsis</h3>
+              <p class="text-gray-300 leading-relaxed" id="film-synopsis"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: BEHIND THE SCENES (BTS) -->
+      <section id="behind-the-scenes" class="mt-24 section-fade">
+        <h2
+          class="text-4xl font-extrabold text-white mb-10 border-b border-gray-700 pb-4"
+        >
+          Behind The Scenes
+        </h2>
+        <p class="text-gray-400 mb-8">
+          A look at the process and technical execution on set.
+        </p>
+
+        <div
+          id="bts-gallery"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <!-- BTS images will be injected here -->
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Data for the films (Hardcoded for single-file deployment)
+      const FILMS_DATA = {
+        1: {
+          title: "Shadows of the City",
+          role: "Director of Photography",
+          synopsis:
+            "A gritty neo-noir following a detective haunted by a past failure, who must navigate the neon-lit underbelly of a sprawling metropolis to find a missing heiress before the city consumes them both. Filmed entirely on vintage anamorphic lenses to capture the atmospheric tension.",
+          director: "Ravi Varma",
+          genre: "Neo-Noir, Thriller",
+          year: 2023,
+          format: "Arri Alexa Mini, Anamorphic Lenses",
+          awards:
+            "Best Cinematography (IndieFest), Audience Choice (Metropolis Film Festival)",
+          poster:
+            "https://placehold.co/500x750/1c1917/ffffff?text=Shadows+Poster",
+          videoEmbedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0", // Replace with Google Drive/YouTube embed link
+          btsImages: [
+            "https://placehold.co/600x400/1c1917/ffffff?text=BTS+1:+Camera+Test",
+            "https://placehold.co/600x400/1c1917/ffffff?text=BTS+2:+Set+Lighting",
+            "https://placehold.co/600x400/1c1917/ffffff?text=BTS+3:+Monitoring",
+          ],
+        },
+        2: {
+          title: "The Silent Ascent",
+          role: "Director of Photography",
+          synopsis:
+            "A powerful documentary charting the journey of a deaf mountain climber attempting the world's most challenging peak. The cinematography focuses on capturing the scale and isolation of the natural world through wide, breathtaking landscapes.",
+          director: "Anya Sharma",
+          genre: "Documentary, Adventure",
+          year: 2022,
+          format: "RED KOMODO, Drone Footage",
+          awards: "Grand Jury Prize (Mountain Film Fest)",
+          poster:
+            "https://placehold.co/500x750/1e293b/ffffff?text=Ascent+Poster",
+          videoEmbedUrl: "https://www.youtube.com/embed/y6120QO_V28?autoplay=0",
+          btsImages: [
+            "https://placehold.co/600x400/1e293b/ffffff?text=BTS+4:+High+Altitude",
+            "https://placehold.co/600x400/1e293b/ffffff?text=BTS+5:+Interview+Setup",
+            "https://placehold.co/600x400/1e293b/ffffff?text=BTS+6:+Crew+Shot",
+          ],
+        },
+        3: {
+          title: "Ephemeral Echoes",
+          role: "Co-Cinematographer",
+          synopsis:
+            "A dreamlike short film exploring memory and loss, told entirely through impressionistic imagery and slow-motion sequences. The visual style is heavily influenced by impressionist painting, using soft focus and practical effects.",
+          director: "Jai Singh",
+          genre: "Experimental, Short",
+          year: 2021,
+          format: "Sony VENICE, Vintage Glass",
+          awards: "Official Selection (Cannes Short Corner)",
+          poster:
+            "https://placehold.co/500x750/3f3f46/ffffff?text=Echoes+Poster",
+          videoEmbedUrl: "https://www.youtube.com/embed/D-eC2z3y2qU?autoplay=0",
+          btsImages: [
+            "https://placehold.co/600x400/3f3f46/ffffff?text=BTS+7:+Vignette+Setup",
+            "https://placehold.co/600x400/3f3f46/ffffff?text=BTS+8:+Practical+FX",
+            "https://placehold.co/600x400/3f3f46/ffffff?text=BTS+9:+Director+Check",
+          ],
+        },
+      };
+
+      // --- Core Logic ---
+
+      function getFilmIdFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        // Default to film 1 if no ID is provided, or if ID is invalid
+        const id = parseInt(params.get("id"));
+        return FILMS_DATA[id] ? id : 1;
+      }
+
+      function loadFilmDetails(filmId) {
+        const film = FILMS_DATA[filmId];
+        if (!film) {
+          document.getElementById("film-title").textContent =
+            "Project Not Found";
+          document.getElementById("film-role").textContent =
+            "Please check the URL.";
+          return;
+        }
+
+        // Update main content
+        document.getElementById("film-title").textContent = film.title;
+        document.getElementById("film-role").textContent = film.role;
+        document.getElementById("film-synopsis").textContent = film.synopsis;
+
+        // Update Details
+        document.getElementById("film-director").textContent = film.director;
+        document.getElementById("film-genre").textContent = film.genre;
+        document.getElementById("film-year").textContent = film.year;
+        document.getElementById("film-format").textContent = film.format;
+        document.getElementById("film-awards").textContent =
+          film.awards || "N/A";
+
+        // Update Poster and Video
+        document.getElementById("film-poster").src = film.poster;
+        document.getElementById("film-video-embed").src = film.videoEmbedUrl;
+
+        // Update BTS Gallery
+        const btsGallery = document.getElementById("bts-gallery");
+        btsGallery.innerHTML = ""; // Clear previous images
+        film.btsImages.forEach((src) => {
+          const imgContainer = document.createElement("div");
+          imgContainer.className =
+            "overflow-hidden rounded-xl shadow-lg hover:shadow-red-500/30 transition duration-500 transform hover:-translate-y-1";
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = `Behind The Scenes from ${film.title}`;
+          img.className = "w-full h-full object-cover";
+          imgContainer.appendChild(img);
+          btsGallery.appendChild(imgContainer);
+        });
+      }
+
+      // Intersection Observer for fade-in effect
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("section-visible");
+              // Stop observing once visible
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      // --- Initialization ---
+
+      window.onload = function () {
+        // Load the correct film details
+        const filmId = getFilmIdFromUrl();
+        loadFilmDetails(filmId);
+
+        // Observe all sections for fade-in effect
+        document.querySelectorAll(".section-fade").forEach((section) => {
+          observer.observe(section);
+        });
+      };
+    </script>
+  </body>
+</html>

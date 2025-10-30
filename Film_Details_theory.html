@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Detail - Sonal Arya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom cinematic scrolling effects for specific elements */
+      html {
+        scroll-behavior: smooth;
+      }
+      /* Updated body background color to match the darker #050505 theme */
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #050505;
+        color: #e0e0e0;
+      }
+
+      /* Updated accent color for links: #f87171 (red-500) */
+      .nav-link {
+        position: relative;
+        transition: color 0.3s ease;
+      }
+      .nav-link:hover {
+        color: #f87171;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 100%;
+        height: 2px;
+        background-color: #f87171; /* Red accent for underline */
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+      .nav-link:hover::after {
+        transform: scaleX(1);
+      }
+
+      .dropdown-menu {
+        transition: all 0.3s ease-out;
+        transform: translateY(10px);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .dropdown:hover .dropdown-menu {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .section-fade {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .section-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .video-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        margin-top: 2rem;
+      }
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.75rem; /* rounded-xl */
+      }
+      /* Added CSS for lightbox controls */
+      .lightbox-btn {
+        transition: all 0.3s ease;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+      }
+      .lightbox-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+      /* Ensure the image is contained within the screen */
+      #lightbox-img {
+        object-fit: contain;
+        max-width: 90%;
+        max-height: 90%;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <!-- Navigation Bar (Sticky) -->
+    <header
+      class="sticky top-0 z-50 bg-[#050505] bg-opacity-95 shadow-2xl backdrop-blur-sm border-b border-gray-900/50"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"
+      >
+        <a
+          href="#hero-section"
+          class="text-2xl font-black tracking-widest text-red-500 hover:text-red-400 transition transform hover:scale-[1.01]"
+        >
+          SONAL ARYA
+        </a>
+        <nav class="flex space-x-6">
+          <!-- Home Link -->
+          <a
+            href="index.html"
+            class="text-sm font-semibold text-red-500 transition duration-300 p-2 rounded-md bg-gray-900/50"
+            >Home</a
+          >
+
+          <!-- NEW FLAT LINKS (FORMERLY DROPDOWN) -->
+          <a
+            href="films.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Films (DOP)</a
+          >
+          <a
+            href="camer_training.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Camera Trainee</a
+          >
+
+          <!-- Flat Links -->
+          <a
+            href="filmphotography.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Film Photography</a
+          >
+          <a
+            href="index.html#contact"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Contact</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <!-- Dynamic Content Section -->
+      <section id="project-details" class="section-fade">
+        <!-- Content will be injected here by JavaScript -->
+        <h1
+          class="text-5xl lg:text-7xl font-extrabold text-white mb-4 tracking-tighter"
+          id="film-title"
+        >
+          Loading...
+        </h1>
+        <p class="text-red-400 text-lg mb-12" id="film-role"></p>
+
+        <div class="lg:flex lg:space-x-12">
+          <!-- SECTION 1: POSTER & DETAILS -->
+          <div class="lg:w-1/3 mb-12 lg:mb-0">
+            <h2
+              class="text-3xl font-bold text-white mb-6 border-b border-gray-700 pb-2"
+            >
+              Film Poster
+            </h2>
+            <img
+              id="film-poster"
+              src="Films/A Game To Remember/Poster.jpeg"
+              alt="Film Poster Placeholder"
+              class="w-full h-auto rounded-xl shadow-2xl object-cover transform hover:scale-[1.02] transition duration-500"
+            />
+
+            <div class="mt-8 p-6 bg-gray-800 rounded-xl shadow-inner">
+              <h3 class="text-xl font-semibold mb-4 text-red-400">
+                Project Details
+              </h3>
+              <div class="space-y-2 text-sm">
+                <p>
+                  <strong>Director:</strong> <span id="film-director"></span>
+                </p>
+                <p><strong>Genre:</strong> <span id="film-genre"></span></p>
+                <p><strong>Year:</strong> <span id="film-year"></span></p>
+                <p><strong>Format:</strong> <span id="film-format"></span></p>
+                <p>
+                  <strong>Awards:</strong>
+                  <span id="film-awards" class="italic text-gray-400"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: VIDEO EMBED & SYNOPSIS -->
+          <div class="lg:w-2/3">
+            <h2
+              class="text-3xl font-bold text-white mb-6 border-b border-gray-700 pb-2"
+            >
+              Film Video
+            </h2>
+            <div class="video-container shadow-2xl">
+              <!-- Video Embed will be placed here -->
+              <iframe
+                id="film-video-embed"
+                src=""
+                allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+
+            <div class="mt-12">
+              <h3 class="text-2xl font-semibold text-red-400 mb-4">Synopsis</h3>
+              <p class="text-gray-300 leading-relaxed" id="film-synopsis"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: BEHIND THE SCENES (BTS) -->
+      <section id="behind-the-scenes" class="mt-24 section-fade">
+        <h2
+          class="text-4xl font-extrabold text-white mb-10 border-b border-gray-700 pb-4"
+        >
+          Behind The Scenes
+        </h2>
+        <p class="text-gray-400 mb-8">
+          A look at the process and technical execution on set.
+        </p>
+
+        <div
+          id="bts-gallery"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <!-- BTS images will be injected here -->
+        </div>
+      </section>
+      <!-- SECTION 4: STILLS -->
+      <section id="stills" class="mt-24 section-fade">
+        <h2
+          class="text-4xl font-extrabold text-white mb-10 border-b border-gray-700 pb-4"
+        >
+          Film Stills
+        </h2>
+        <p class="text-gray-400 mb-8">
+          Selected still frames that capture the tone, lighting, and visual
+          language of the film.
+        </p>
+
+        <div
+          id="stills-gallery"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <!-- Stills images will be injected here by JavaScript -->
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Data for the films (Hardcoded for single-file deployment)
+      const FILMS_DATA = {
+        1: {
+          title: "A Theory of a Molecular Universe",
+          role: "Director of Photography",
+          synopsis:
+            "A gritty neo-noir following a detective haunted by a past failure, who must navigate the neon-lit underbelly of a sprawling metropolis to find a missing heiress before the city consumes them both. Filmed entirely on vintage anamorphic lenses to capture the atmospheric tension.",
+          director: "Ravi Varma",
+          genre: "Neo-Noir, Thriller",
+          year: 2023,
+          format: "Arri Alexa Mini, Anamorphic Lenses",
+          awards:
+            "Best Cinematography (IndieFest), Audience Choice (Metropolis Film Festival)",
+          poster: "Films/A Theory of a Molecular Universe/Poster with logo.png",
+          videoEmbedUrl:
+            "https://drive.google.com/file/d/1dmR9P-Y4oVgmHZkCoWIuniX8CfsHIEFG/preview", // Replace with Google Drive/YouTube embed link
+          btsImages: [
+            "Films/A Theory of a Molecular Universe/BTS/0EA03B57-BCE4-448D-9E03-0B45E8E4FD8A.JPG",
+            "Films/A Theory of a Molecular Universe/BTS/1DDAA883-0A25-4B9D-A4F8-E1B142DC3EB8.JPG",
+            "Films/A Theory of a Molecular Universe/BTS/3d7f4bec-da06-459f-af73-775b3ea5a942.JPG",
+            "Films/A Theory of a Molecular Universe/BTS/000028.JPG",
+            "Films/A Theory of a Molecular Universe/BTS/62AEDEF0-9494-4182-822F-EA5FD9231BD6.JPG",
+            "Films/A Theory of a Molecular Universe/BTS/87C8FF52-27C0-4B7D-B75F-1AB6456EB2FC.JPG",
+            "Films/A Theory of a Molecular Universe/BTS/33668A30-7327-4B2A-B50C-DD9A2B5689EE.JPG",
+            "Films/A Theory of a Molecular Universe/BTS/90926281-BC45-4219-8B36-E08FCE0E9F47.JPG",
+          ],
+          stills: [
+            "Films/A Theory of a Molecular Universe/Stills/A Theory Of A Molecular Universe.mp4.00_00_39_29.Still002.png",
+            "Films/A Theory of a Molecular Universe/Stills/A Theory Of A Molecular Universe.mp4.00_01_00_19.Still004.png",
+            "Films/A Theory of a Molecular Universe/Stills/A Theory Of A Molecular Universe.mp4.00_04_20_27.Still003.png",
+            "Films/A Theory of a Molecular Universe/Stills/Jupitor.jpg",
+          ],
+        },
+      };
+
+      // --- Lightbox State ---
+      let currentGallery = []; // Array of image sources for the current gallery
+      let currentIndex = 0; // Index of the image currently displayed
+
+      // Helper function to update the content and controls of the lightbox
+      function updateLightboxContent() {
+        const img = document.getElementById("lightbox-img");
+        const counter = document.getElementById("lightbox-counter");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+
+        img.src = currentGallery[currentIndex];
+        counter.textContent = `${currentIndex + 1} of ${currentGallery.length}`;
+
+        // Manage button disabled state
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === currentGallery.length - 1;
+      }
+
+      function openLightbox(galleryArray, index) {
+        currentGallery = galleryArray;
+        currentIndex = index;
+
+        updateLightboxContent();
+
+        const lightbox = document.getElementById("lightbox");
+        lightbox.classList.remove("hidden");
+        lightbox.classList.add("flex");
+        // Disable body scrolling
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        const lightbox = document.getElementById("lightbox");
+        lightbox.classList.add("hidden");
+        lightbox.classList.remove("flex");
+        // Re-enable body scrolling
+        document.body.style.overflow = "";
+      }
+
+      function nextImage() {
+        if (currentIndex < currentGallery.length - 1) {
+          currentIndex++;
+          updateLightboxContent();
+        }
+      }
+
+      function prevImage() {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateLightboxContent();
+        }
+      }
+
+      // --- Core Logic ---
+
+      function getFilmIdFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        // Default to film 1 if no ID is provided, or if ID is invalid
+        const id = parseInt(params.get("id"));
+        return FILMS_DATA[id] ? id : 1;
+      }
+
+      function loadFilmDetails(filmId) {
+        const film = FILMS_DATA[filmId];
+        if (!film) {
+          document.getElementById("film-title").textContent =
+            "Project Not Found";
+          document.getElementById("film-role").textContent =
+            "Please check the URL.";
+          return;
+        }
+
+        // Update main content
+        document.getElementById("film-title").textContent = film.title;
+        document.getElementById("film-role").textContent = film.role;
+        document.getElementById("film-synopsis").textContent = film.synopsis;
+
+        // Update Details
+        document.getElementById("film-director").textContent = film.director;
+        document.getElementById("film-genre").textContent = film.genre;
+        document.getElementById("film-year").textContent = film.year;
+        document.getElementById("film-format").textContent = film.format;
+        document.getElementById("film-awards").textContent =
+          film.awards || "N/A";
+
+        // Update Poster and Video
+        document.getElementById("film-poster").src = film.poster;
+        document.getElementById("film-video-embed").src = film.videoEmbedUrl;
+
+        // Helper function to create gallery elements
+        function createGallery(galleryId, imagesArray, imageType) {
+          const galleryElement = document.getElementById(galleryId);
+          galleryElement.innerHTML = ""; // Clear previous images
+          imagesArray.forEach((src, index) => {
+            const imgContainer = document.createElement("div");
+            // Added cursor-pointer and hover effect for clickability
+            imgContainer.className =
+              "overflow-hidden rounded-xl shadow-lg hover:shadow-red-500/30 transition duration-500 transform hover:-translate-y-1 cursor-pointer";
+
+            // Attach openLightbox handler to the container
+            imgContainer.onclick = () => openLightbox(imagesArray, index);
+
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = `${imageType} from ${film.title}`;
+            // Added aspect-ratio for uniform grid thumbnail display
+            img.className = "w-full h-full object-cover aspect-video";
+            imgContainer.appendChild(img);
+            galleryElement.appendChild(imgContainer);
+          });
+        }
+
+        // Update BTS Gallery
+        createGallery("bts-gallery", film.btsImages, "Behind The Scenes");
+
+        // Update Stills Gallery
+        if (film.stills && film.stills.length > 0) {
+          createGallery("stills-gallery", film.stills, "Film Still");
+        }
+      }
+
+      // Intersection Observer for fade-in effect
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("section-visible");
+              // Stop observing once visible
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      // --- Initialization ---
+
+      window.onload = function () {
+        // Load the correct film details
+        const filmId = getFilmIdFromUrl();
+        loadFilmDetails(filmId);
+
+        // Observe all sections for fade-in effect
+        document.querySelectorAll(".section-fade").forEach((section) => {
+          observer.observe(section);
+        });
+
+        // Add keyboard navigation (optional, but good UX)
+        document.addEventListener("keydown", (e) => {
+          const lightbox = document.getElementById("lightbox");
+          if (!lightbox || lightbox.classList.contains("hidden")) return;
+
+          if (e.key === "ArrowRight") {
+            nextImage();
+          } else if (e.key === "ArrowLeft") {
+            prevImage();
+          } else if (e.key === "Escape") {
+            closeLightbox();
+          }
+        });
+      };
+    </script>
+    <!-- Lightbox Structure (ADDED) -->
+    <div
+      id="lightbox"
+      class="fixed inset-0 bg-black/90 hidden justify-center items-center z-[9999]"
+      onclick="if(event.target === this) closeLightbox()"
+    >
+      <div class="relative w-full h-full flex justify-center items-center">
+        <!-- Close Button -->
+        <button
+          onclick="closeLightbox()"
+          class="absolute top-4 right-4 text-white text-3xl p-2 rounded-full bg-black/50 hover:bg-red-500 transition duration-300 z-[10001] shadow-lg"
+          aria-label="Close Lightbox"
+        >
+          &times;
+        </button>
+
+        <!-- Previous Button -->
+        <button
+          id="prev-btn"
+          onclick="prevImage()"
+          class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl p-4 rounded-full bg-black/50 hover:bg-red-500 transition duration-300 z-[10001] disabled:opacity-30 disabled:cursor-not-allowed lightbox-btn"
+          aria-label="Previous Image"
+        >
+          &#10094;
+        </button>
+
+        <!-- Image Container -->
+        <img
+          id="lightbox-img"
+          src=""
+          alt="Expanded image"
+          class="rounded-lg shadow-2xl transition-transform duration-500 transform max-w-[90%] max-h-[90%]"
+          onclick="event.stopPropagation()"
+        />
+
+        <!-- Next Button -->
+        <button
+          id="next-btn"
+          onclick="nextImage()"
+          class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl p-4 rounded-full bg-black/50 hover:bg-red-500 transition duration-300 z-[10001] disabled:opacity-30 disabled:cursor-not-allowed lightbox-btn"
+          aria-label="Next Image"
+        >
+          &#10095;
+        </button>
+
+        <!-- Index Counter -->
+        <div
+          id="lightbox-counter"
+          class="absolute bottom-4 text-white text-lg font-semibold bg-black/50 px-4 py-2 rounded-lg shadow-xl"
+        >
+          1 of 1
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

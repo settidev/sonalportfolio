@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sonal Arya | Cinematography Portfolio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind to use Inter font and a dark theme -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #050505; /* Even Deeper Dark Background */
+        color: #f5f5f5; /* Near-White Text */
+      }
+      /* Custom section divider line */
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 50px;
+        height: 2px;
+        background-color: #f87171; /* Brighter Red accent */
+        margin-top: 8px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* --- CAROUSEL STYLES (Fixed Background) --- */
+      #hero-carousel {
+        position: fixed; /* Keep background fixed for cinematic parallax feel */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 0;
+      }
+      .carousel-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 2.5s ease-in-out; /* Smooth fading animation */
+        object-fit: cover;
+        filter: brightness(0.4); /* Darken images to keep text legible */
+      }
+      .carousel-image.active {
+        opacity: 1;
+      }
+
+      /* Style for the video embed container */
+      .video-responsive {
+        overflow: hidden;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        position: relative;
+        height: 0;
+        border-radius: 0.75rem;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
+      }
+      .video-responsive iframe {
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        border: 0;
+      }
+
+      /* Ensure content after hero sits above the fixed background */
+      .main-content {
+        position: relative;
+        z-index: 10;
+        background-color: #050505; /* Seamless transition to main background */
+        min-height: 100vh; /* Make sure the content can scroll */
+        padding-top: 100vh; /* Push content down initially */
+      }
+      /* Style for initial hero scroll animation */
+      #hero-content {
+        transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+      }
+
+      /* --- CSS for Section Fade-In on Scroll --- */
+      .fade-section {
+        opacity: 0;
+        transform: translateY(40px); /* Start slightly below final position */
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .fade-section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Fix for anchors under fixed header */
+      .anchor-padding {
+        display: block;
+        position: relative;
+        top: -90px; /* Adjust this value to match header height + some padding */
+        visibility: hidden;
+      }
+      
+      /* --- Lightbox Styles (NEW) --- */
+      .lightbox-btn {
+        transition: all 0.3s ease;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+      }
+      .lightbox-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+      /* Ensure the image is contained within the screen */
+      #lightbox-img {
+        object-fit: contain;
+        max-width: 90%;
+        max-height: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header & Navigation (Sticky/Fixed) -->
+    <header
+      class="sticky top-0 z-50 bg-[#050505] bg-opacity-95 shadow-2xl backdrop-blur-sm border-b border-gray-900/50"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"
+      >
+        <a
+          href="#hero-section"
+          class="text-2xl font-black tracking-widest text-red-500 hover:text-red-400 transition transform hover:scale-[1.01]"
+        >
+          SONAL ARYA
+        </a>
+        <nav class="flex space-x-6">
+          <!-- Home Link -->
+          <a
+            href="index.html"
+            class="text-sm font-semibold text-red-500 transition duration-300 p-2 rounded-md bg-gray-900/50"
+            >Home</a
+          >
+
+          <!-- Showreel Link -->
+          <a
+            href="#intro-video"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Showreel</a
+          >
+
+          <!-- NEW FLAT LINKS (FORMERLY DROPDOWN) -->
+          <a
+            href="films.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Films (DOP)</a
+          >
+          <a
+            href="camer_training.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Camera Trainee</a
+          >
+
+          <!-- Flat Links -->
+          <a
+            href="filmphotography.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Film Photography</a
+          >
+          <a
+            href="#contact"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Contact</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section (Full Screen Introductory Content) -->
+    <section
+      id="hero-section"
+      class="relative min-h-screen flex items-center justify-center text-center overflow-hidden"
+    >
+      <!-- Image Carousel Background (FIXED position for effect) -->
+      <div id="hero-carousel">
+        <!-- Replace these placeholder URLs with your public image links -->
+        <img
+          src="Film Photography/Flora and Fauna/000040(1).JPG"
+          class="carousel-image active"
+          alt="Cinematic background image 1"
+        />
+        <img
+          src="Film Photography/Flora and Fauna/000048(1).JPG"
+          class="carousel-image"
+          alt="Cinematic background image 2"
+        />
+        <img
+          src="Film Photography/Flora and Fauna/000056(1).JPG"
+          class="carousel-image"
+          alt="Cinematic background image 3"
+        />
+      </div>
+
+      <!-- Text Content Overlay (Will be animated on scroll) -->
+      <div
+        id="hero-content"
+        class="max-w-5xl mx-auto px-6 py-20 relative z-10 text-shadow-lg"
+      >
+        <h1
+          class="text-7xl sm:text-8xl lg:text-9xl font-extrabold tracking-tighter leading-none text-white drop-shadow-2xl"
+        >
+          SONAL ARYA
+        </h1>
+        <p
+          class="text-red-400 text-xl sm:text-2xl mt-4 mb-8 uppercase tracking-widest font-light drop-shadow-xl"
+        >
+          Director of Photography | Visual Storyteller
+        </p>
+        <p
+          class="text-gray-300 max-w-2xl mx-auto text-base sm:text-lg italic font-light"
+        >
+          "Specializing in mood, movement, and capturing the intimate human
+          experience through the lens of cinema."
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Content Wrapper (Scrolls over the fixed hero background) -->
+    <div class="main-content">
+      <!-- 1. Introductory Video Section (LATEST SHOWREEL) - CORRECTLY FIRST SECTION -->
+      <section
+        id="intro-video"
+        class="pb-0 pt-8 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 fade-section"
+      >
+        <span class="anchor-padding"></span>
+        <h2 class="section-title text-4xl font-extrabold text-center mb-12">
+          Latest Showreel
+        </h2>
+        <p class="text-center text-gray-400 mb-12 max-w-3xl mx-auto">
+          My most recent compilation of commercial and narrative work,
+          highlighting my distinct visual signature.
+        </p>
+        <div
+          class="bg-[#0f0f0f] p-6 rounded-xl shadow-2xl transition duration-300 hover:shadow-red-500/30"
+        >
+          <div class="video-responsive">
+            <!-- Placeholder for Showreel -->
+            <iframe
+              src="https://drive.google.com/file/d/1dmR9P-Y4oVgmHZkCoWIuniX8CfsHIEFG/preview?mute=1"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+            >
+            </iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Films Portfolio Section (DOP Work) -->
+      <section
+        id="films"
+        class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-900 fade-section"
+      >
+        <span class="anchor-padding"></span>
+        <h2 class="section-title text-4xl font-extrabold text-center mb-12">
+          Films (DOP Work)
+        </h2>
+        <p class="text-center text-gray-400 mb-16 max-w-3xl mx-auto">
+          Key projects where I served as the primary Director of Photography,
+          focusing on narrative and commercial mood.
+        </p>
+
+        <!-- Video Embed Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <!-- Video 2: Short Film Clip -->
+            <a href="Film_Details_gametoremb.html">
+          <div
+            class="bg-[#0f0f0f] p-6 rounded-xl shadow-2xl transition duration-300 hover:shadow-red-500/20"
+          >
+            <div class="video-responsive">
+             
+              <img
+                src="Films/A Game To Remember/Poster.jpeg"
+                
+              >
+              </img>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-2xl font-bold text-red-400">
+                Short Film: "Game to Remember"
+              </h3>
+              <p class="text-gray-500 text-sm">
+                A deep dive into low-light cinematography and color grading.
+              </p>
+            </div>
+          </div>
+          </a>
+
+          <!-- Video 3: Commercial Project -->
+           <a href="Film_Details_theory.html">
+          <div
+            class="bg-[#0f0f0f] p-6 rounded-xl shadow-2xl transition duration-300 hover:shadow-red-500/20"
+          >
+            <div class="video-responsive">
+              <img
+                src="Films/A Theory of a Molecular Universe/Poster with logo.png"
+                
+              >
+              </img>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-2xl font-bold text-red-400">
+                Short Film: "A Theory of a Molecular Universe"
+              </h3>
+              <p class="text-gray-500 text-sm">
+                High-energy commercial spot for an athletic brand, emphasizing
+                motion.
+              </p>
+            </div>
+          </div>
+          </a>
+
+          <!-- NEW: Additional Video Placeholder -->
+             <a href="Film_Details_unb_gap.html">
+          <div
+            class="bg-[#0f0f0f] p-6 rounded-xl shadow-2xl transition duration-300 hover:shadow-red-500/20"
+          >
+            <div class="video-responsive">
+              <img
+                src="Films/An Unbridgeable Gap/Poster.jpg"
+                
+              >
+              </img>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-2xl font-bold text-red-400">
+                Short Film: "An Unbridgeable Gap"
+              </h3>
+              <p class="text-gray-500 text-sm">
+                Excerpt from a dramatic feature film, utilizing anamorphic
+                lenses.
+              </p>
+            </div>
+          </div>
+          </a>
+
+        </div>
+      </section>
+
+   
+
+      <!-- 4. Photography Stills Section - MOVED DOWN HERE -->
+      <section
+        id="photos"
+        class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-900 fade-section"
+      >
+        <span class="anchor-padding"></span>
+        <h2 class="section-title text-4xl font-extrabold text-center mb-12">
+          Film Photography & Stills
+        </h2>
+        <p class="text-center text-gray-400 mb-16 max-w-3xl mx-auto">
+          A curated selection of frame-grabs and onset photography, showcasing
+          composition, lighting, and my analog film work.
+        </p>
+
+        <!-- Photo Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+          <!-- Photo 1 -->
+          <div
+            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 0)"
+          >
+            <img
+              src="Film Photography/Flora and Fauna/000007.JPG"
+              alt="Still image showcasing deep shadows"
+              class="w-full h-auto object-cover aspect-[3/2] transition-all duration-700 group-hover:scale-110 group-hover:opacity-90"
+            />
+          </div>
+
+          <!-- Photo 2 -->
+          <div
+            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 1)"
+          >
+            <img
+              src="Film Photography/Flora and Fauna/000020.JPG"
+              alt="Still image showcasing wide composition"
+              class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
+            />
+          </div>
+
+          <!-- Photo 3 -->
+          <div
+            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 2)"
+          >
+            <img
+              src="Film Photography/Flora and Fauna/000026.JPG"
+              alt="Still image showcasing color palette"
+              class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
+            />
+          </div>
+
+          <!-- Photo 4 -->
+          <div
+            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 3)"
+          >
+            <img
+              src="Film Photography/Flora and Fauna/000040(1).JPG"
+              alt="Still image showcasing high contrast"
+              class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
+            />
+          </div>
+
+          <!-- NEW: Additional Photo Placeholders -->
+          <div
+            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 4)"
+          >
+            <img
+              src="Film Photography/Flora and Fauna/000044(1).JPG"
+              alt="Analog film shot 1"
+              class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
+            />
+          </div>
+          <div
+            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 5)"
+          >
+            <img
+              src="Film Photography/Flora and Fauna/000044(2).JPG"
+              alt="Analog film shot 2"
+              class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
+            />
+          </div>
+          <div
+            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 6)"
+          >
+            <img
+              src="Film Photography/Flora and Fauna/000047.JPG"
+              alt="Behind the scenes photo"
+              class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
+            />
+          </div>
+          <div
+            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 7)"
+          >
+            <img
+              src="Film Photography/Flora and Fauna/000048(1).JPG"
+              alt="Behind the scenes photo"
+              class="w-full h-auto object-cover aspect-[3/2] transition duration-300 transform hover:scale-[1.02]"
+            />
+          </div>
+        </div>
+      </section>
+      <!-- 5. Contact Section -->
+      <section
+        id="contact"
+        class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-900 fade-section"
+      >
+        <span class="anchor-padding"></span>
+        <h2 class="section-title text-4xl font-extrabold text-center mb-12">
+          Contact & Resume
+        </h2>
+
+        <div
+          class="max-w-xl mx-auto text-center bg-[#0f0f0f] p-10 rounded-xl shadow-2xl border border-gray-800"
+        >
+          <p class="text-gray-400 mb-8 text-xl">
+            I'm actively seeking new projects, both narrative and commercial.
+            Please feel free to reach out directly.
+          </p>
+
+          <!-- RESUME DOWNLOAD BUTTON -->
+          <a
+            href="path/to/Sonal_Arya_Cinematography_Resume.pdf"
+            download
+            class="inline-flex items-center justify-center w-full px-6 py-4 text-lg font-bold rounded-lg text-white bg-red-500 hover:bg-red-600 transition duration-300 transform hover:scale-[1.01] shadow-lg shadow-red-500/50 mb-8"
+          >
+            Download Full Resume (PDF)
+          </a>
+
+          <!-- CONTACT DETAILS -->
+          <div class="space-y-4 pt-4 border-t border-gray-700">
+            <h3 class="text-3xl font-bold text-red-500 pt-4">Direct Contact</h3>
+            <a
+              href="mailto:sonal.arya@example.com"
+              class="block text-xl font-medium text-white hover:text-red-400 transition"
+            >
+              sonal.arya@example.com
+            </a>
+            <p class="text-gray-500">Based in [Your City, Country]</p>
+          </div>
+
+          <!-- SOCIAL MEDIA LINKS -->
+          <div class="mt-10 space-x-6 text-xl flex justify-center">
+            <a
+              href="#"
+              class="text-gray-400 hover:text-red-500 transition duration-300 transform hover:scale-110"
+              title="IMDb Profile"
+            >
+              IMDb
+            </a>
+            <a
+              href="#"
+              class="text-gray-400 hover:text-red-500 transition duration-300 transform hover:scale-110"
+              title="Instagram"
+            >
+              Instagram
+            </a>
+            <a
+              href="#"
+              class="text-gray-400 hover:text-red-500 transition duration-300 transform hover:scale-110"
+              title="LinkedIn Profile"
+            >
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="bg-[#0f0f0f] py-6 mt-12 border-t border-gray-900">
+        <div
+          class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600 text-sm"
+        >
+          &copy; 2025 Sonal Arya. Cinematography Portfolio.
+        </div>
+      </footer>
+    </div>
+
+    <!-- JavaScript for Image Carousel, Hero Scroll Animation, and Section Fade-In -->
+    <script>
+      // --- Global State for Lightbox (NEW) ---
+      const PHOTOGRAPHY_GALLERY = [
+        'Film Photography/Flora and Fauna/000007.JPG',
+'Film Photography/Flora and Fauna/000020.JPG',
+'Film Photography/Flora and Fauna/000026.JPG',
+'Film Photography/Flora and Fauna/000040(1).JPG',
+'Film Photography/Flora and Fauna/000044(1).JPG',
+'Film Photography/Flora and Fauna/000044(2).JPG',
+'Film Photography/Flora and Fauna/000047.JPG',
+'Film Photography/Flora and Fauna/000048(1).JPG',
+'Film Photography/Flora and Fauna/000051.JPG',
+'Film Photography/Flora and Fauna/000052.JPG',
+'Film Photography/Flora and Fauna/000055.JPG',
+'Film Photography/Flora and Fauna/000056(1).JPG',
+'Film Photography/Flora and Fauna/000057.JPG',
+'Film Photography/Flora and Fauna/000060.JPG',
+      ];
+      let currentGallery = []; // Array of image sources for the current gallery
+      let currentIndex = 0;    // Index of the image currently displayed
+
+      // --- Lightbox Functions (UPDATED) ---
+
+      function updateLightboxContent() {
+        const img = document.getElementById("lightbox-img");
+        const counter = document.getElementById("lightbox-counter");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+
+        // Set the image source
+        img.src = currentGallery[currentIndex];
+
+        // Update the counter text
+        counter.textContent = `${currentIndex + 1} of ${currentGallery.length}`;
+
+        // Disable buttons at the start/end of the gallery
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === currentGallery.length - 1;
+      }
+
+      function openLightbox(galleryArray, index) {
+        currentGallery = galleryArray;
+        currentIndex = index;
+
+        updateLightboxContent();
+
+        const lightbox = document.getElementById("lightbox");
+        lightbox.classList.remove("hidden");
+        lightbox.classList.add("flex");
+        // Disable body scrolling
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        const lightbox = document.getElementById("lightbox");
+        lightbox.classList.add("hidden");
+        lightbox.classList.remove("flex");
+        // Re-enable body scrolling
+        document.body.style.overflow = "";
+      }
+
+      function nextImage() {
+        if (currentIndex < currentGallery.length - 1) {
+          currentIndex++;
+          updateLightboxContent();
+        }
+      }
+
+      function prevImage() {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateLightboxContent();
+        }
+      }
+
+      // --- Image Carousel Logic ---
+      const images = document.querySelectorAll(".carousel-image");
+      let currentCarouselImage = 0;
+
+      function showNextImage() {
+        if (images.length === 0) return;
+        images[currentCarouselImage].classList.remove("active");
+        currentCarouselImage = (currentCarouselImage + 1) % images.length;
+        images[currentCarouselImage].classList.add("active");
+      }
+
+      // --- Cinematic Scroll Animation Logic (Hero Content) ---
+      document.addEventListener("DOMContentLoaded", () => {
+        const heroContent = document.getElementById("hero-content");
+        const scrollThreshold = window.innerHeight * 0.5;
+
+        // --- Section Fade-In Logic (using Intersection Observer) ---
+        const fadeSections = document.querySelectorAll(".fade-section");
+        const observerOptions = {
+          root: null, // viewport
+          rootMargin: "0px",
+          threshold: 0.2, // Trigger when 20% of the section is visible
+        };
+
+        const sectionObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                // Mark section as visible, triggering the CSS transition
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target); // Stop observing once it's visible
+              }
+            });
+          },
+          observerOptions
+        );
+
+        fadeSections.forEach((section) => {
+          sectionObserver.observe(section);
+        });
+        // --- End Section Fade-In Logic ---
+
+        function handleScroll() {
+          const scrollY = window.scrollY;
+
+          // Calculate progress for the hero text fade-out
+          let progress = Math.min(1, scrollY / scrollThreshold);
+
+          // 1. Fade out opacity (from 1 to 0)
+          let opacity = 1 - progress * 1.5;
+          heroContent.style.opacity = Math.max(0, opacity);
+
+          // 2. Scale down (from 1 to 0.8) for the "going back" effect
+          let scale = 1 - progress * 0.2;
+          heroContent.style.transform = `scale(${Math.max(0.8, scale)})`;
+        }
+
+        // Initial setup on load
+        if (images.length > 0) {
+          images[0].classList.add("active");
+        }
+        setInterval(showNextImage, 6000); // Start carousel
+
+        // Start scroll listener for hero content
+        window.addEventListener("scroll", handleScroll);
+        handleScroll();
+
+        // --- Keyboard Navigation for Lightbox ---
+        document.addEventListener('keydown', (e) => {
+          const lightbox = document.getElementById("lightbox");
+          if (!lightbox || lightbox.classList.contains('hidden')) return;
+
+          if (e.key === 'ArrowRight') {
+            nextImage();
+          } else if (e.key === 'ArrowLeft') {
+            prevImage();
+          } else if (e.key === 'Escape') {
+            closeLightbox();
+          }
+        });
+      });
+    </script>
+
+    <!-- Lightbox Structure (UPDATED) -->
+    <div
+      id="lightbox"
+      class="fixed inset-0 bg-black/90 hidden justify-center items-center z-[9999]"
+      onclick="if(event.target === this) closeLightbox()"
+    >
+      <div
+        class="relative w-full h-full flex justify-center items-center"
+      >
+        <!-- Close Button -->
+        <button
+          onclick="closeLightbox()"
+          class="absolute top-4 right-4 text-white text-3xl p-2 rounded-full bg-black/50 hover:bg-red-500 transition duration-300 z-[10001] shadow-lg"
+          aria-label="Close Lightbox"
+        >
+          &times;
+        </button>
+
+        <!-- Previous Button -->
+        <button
+          id="prev-btn"
+          onclick="prevImage()"
+          class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl p-4 rounded-full bg-black/50 hover:bg-red-500 transition duration-300 z-[10001] disabled:opacity-30 disabled:cursor-not-allowed lightbox-btn"
+          aria-label="Previous Image"
+        >
+          &#10094;
+        </button>
+
+        <!-- Image Container -->
+        <img
+          id="lightbox-img"
+          src=""
+          alt="Expanded image"
+          class="rounded-lg shadow-2xl transition-transform duration-500 transform max-w-[90%] max-h-[90%]"
+          onclick="event.stopPropagation()"
+        />
+
+        <!-- Next Button -->
+        <button
+          id="next-btn"
+          onclick="nextImage()"
+          class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl p-4 rounded-full bg-black/50 hover:bg-red-500 transition duration-300 z-[10001] disabled:opacity-30 disabled:cursor-not-allowed lightbox-btn"
+          aria-label="Next Image"
+        >
+          &#10095;
+        </button>
+
+        <!-- Index Counter -->
+        <div id="lightbox-counter" class="absolute bottom-4 text-white text-lg font-semibold bg-black/50 px-4 py-2 rounded-lg shadow-xl">
+          1 of 1
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

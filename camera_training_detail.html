@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trainee Project Detail | Sonal Arya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+      html {
+        scroll-behavior: smooth;
+      }
+      /* Matching the requested theme: Black (#050505) and Red (#f87171) */
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #050505;
+        color: #e0e0e0;
+      }
+
+      /* Red accent for links */
+      .nav-link {
+        position: relative;
+        transition: color 0.3s ease;
+      }
+      .nav-link:hover {
+        color: #f87171;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 100%;
+        height: 2px;
+        background-color: #f87171;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+      .nav-link:hover::after {
+        transform: scaleX(1);
+      }
+
+      .section-fade {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .section-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        margin-top: 2rem;
+      }
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.75rem; /* rounded-xl */
+      }
+      /* Custom style for the lightbox buttons */
+      .lightbox-nav-btn {
+        background-color: rgba(0, 0, 0, 0.4);
+        padding: 1rem 0.5rem;
+        transition: background-color 0.2s;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        user-select: none;
+      }
+      .lightbox-nav-btn:hover {
+        background-color: rgba(248, 113, 129, 0.6); /* Red on hover */
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <!-- Navigation Bar (Sticky) - Consistent with other pages -->
+    <header
+      class="sticky top-0 z-50 bg-[#050505] bg-opacity-95 shadow-2xl backdrop-blur-sm border-b border-gray-900/50"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"
+      >
+        <a
+          href="#hero-section"
+          class="text-2xl font-black tracking-widest text-red-500 hover:text-red-400 transition transform hover:scale-[1.01]"
+        >
+          SONAL ARYA
+        </a>
+        <comment-tag id="1"><nav class="flex space-x-6"></comment-tag id="1">
+          <!-- Home Link -->
+          <a
+            href="index.html"
+            class="text-sm font-semibold text-red-500 transition duration-300 p-2 rounded-md bg-gray-900/50"
+            >Home</a
+          >
+
+          <!-- NEW FLAT LINKS (FORMERLY DROPDOWN) -->
+          <a
+            href="films.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Films (DOP)</a
+          >
+          <a
+            href="camer_training.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Camera Trainee</a
+          >
+
+          <!-- Flat Links -->
+          <a
+            href="filmphotography.html"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Film Photography</a
+          >
+          <a
+            href="index.html#contact"
+            class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
+            >Contact</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <comment-tag id="2"><main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"></comment-tag id="2">
+      <!-- 1. PROJECT HEADER AND MY SPECIFIC ROLE (Combined Intro) -->
+      <section id="project-intro" class="section-fade">
+        <p class="text-red-400 text-xl mb-4" id="project-role">
+          Loading Role...
+        </p>
+        <h1
+          class="text-5xl lg:text-7xl font-extrabold text-white mb-8 tracking-tighter"
+          id="project-title"
+        >
+          Loading Project...
+        </h1>
+
+        <h2
+          class="text-3xl font-semibold text-red-400 mb-4 border-b border-gray-700 pb-2"
+        >
+          My Specific Role & Contributions
+        </h2>
+        <p
+          class="text-gray-300 leading-relaxed text-lg mb-12"
+          id="project-challenges"
+        ></p>
+      </section>
+
+      <!-- 2. NEW SECTION: GROUP PHOTO / THE CREW -->
+      <section id="group-photo-section" class="mt-12 section-fade">
+        <h2
+          class="text-4xl font-extrabold text-white mb-8 border-b border-gray-700 pb-4 text-red-400"
+        >
+          The Crew
+        </h2>
+        <p class="text-gray-400 mb-8">
+          The full team behind the scenes, ensuring the smooth execution of the
+          project. (Click to zoom)
+        </p>
+        <img
+          id="project-group-photo"
+          src=""
+          alt="Crew Group Photo"
+          class="w-full h-auto rounded-xl shadow-2xl object-cover border border-gray-800"
+        />
+      </section>
+      <!-- END NEW SECTION -->
+
+      <!-- 3. BEHIND THE SCENES (BTS) GALLERY -->
+      <section id="bts-gallery-section" class="mt-24 section-fade">
+        <h2
+          class="text-4xl font-extrabold text-white mb-10 border-b border-gray-700 pb-4 text-red-400"
+        >
+          Set Photos & Logistics
+        </h2>
+        <p class="text-gray-400 mb-8">
+          Visual documentation of organization, rigging, and teamwork on set.
+          (Click any image to start gallery view)
+        </p>
+
+        <div
+          id="bts-gallery"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <!-- BTS images will be injected here -->
+        </div>
+      </section>
+      
+      <!-- HIDDEN ELEMENTS: Retaining IDs for JavaScript compatibility, as requested to remove visual components -->
+      <div class="hidden">
+        <span id="project-type"></span>
+        <span id="project-camera"></span>
+        <span id="project-lenses"></span>
+        <span id="project-format"></span>
+        <span id="project-duration"></span>
+        <img id="project-key-image" src="" alt="" />
+        <iframe id="project-video-embed" src=""></iframe>
+      </div>
+    </main>
+
+    <footer class="bg-[#0f0f0f] py-6 mt-12 border-t border-gray-900">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600 text-sm"
+      >
+        &copy; 2025 Sonal Arya. Cinematography Portfolio.
+      </div>
+    </footer>
+
+    <!-- Lightbox Modal Structure -->
+    <div
+      id="lightbox-modal"
+      class="fixed inset-0 z-[100] hidden items-center justify-center bg-black bg-opacity-90 backdrop-blur-sm p-4"
+      onclick="closeLightbox()"
+    >
+      <div
+        class="relative max-w-7xl max-h-full w-full flex items-center justify-center"
+        onclick="event.stopPropagation()"
+      >
+        <!-- Previous Button -->
+        <button
+          id="lightbox-prev-btn"
+          onclick="showPrev()"
+          class="absolute left-0 lg:-left-20 text-white hover:text-red-500 text-6xl opacity-75 hover:opacity-100 transition duration-300 z-10 hidden lightbox-nav-btn"
+          aria-label="Previous Photo"
+        >
+          &#10094;
+        </button>
+
+        <div class="relative w-full max-w-6xl">
+          <!-- Close Button -->
+          <button
+            onclick="closeLightbox()"
+            class="absolute -top-12 right-0 text-white hover:text-red-500 text-5xl font-light p-2 transition duration-300 z-10"
+            aria-label="Close Lightbox"
+          >
+            &times;
+          </button>
+          <!-- Image Content -->
+          <img
+            id="lightbox-image"
+            src=""
+            alt="Zoomed in project photo"
+            class="max-w-full max-h-[85vh] rounded-lg shadow-2xl border border-gray-700 object-contain mx-auto"
+          />
+          <!-- Caption -->
+          <p
+            id="lightbox-caption"
+            class="mt-4 text-center text-gray-300 text-lg"
+          >
+            Loading image caption...
+          </p>
+        </div>
+
+        <!-- Next Button -->
+        <button
+          id="lightbox-next-btn"
+          onclick="showNext()"
+          class="absolute right-0 lg:-right-20 text-white hover:text-red-500 text-6xl opacity-75 hover:opacity-100 transition duration-300 z-10 hidden lightbox-nav-btn"
+          aria-label="Next Photo"
+        >
+          &#10095;
+        </button>
+      </div>
+    </div>
+    <!-- End Lightbox Modal -->
+
+    <script>
+      // Global state for lightbox gallery
+      let currentImages = []; // Stores {src, alt} objects for the current project
+      let currentIndex = -1;  // Stores the index of the currently displayed image
+
+      // Data for the Trainee projects (Hardcoded for single-file deployment)
+      const TRAINEE_DATA = {
+        1: {
+          title: "Different Shores",
+          projectType: "Feature Film",
+          // This text now serves as the Role description
+          challenges:
+            "Assisted the 2nd AC on a complex action sequence requiring frequent, fast lens changes and meticulous management of 4-camera media backups. Gained proficiency in setting up wireless focus systems (e.g., Preston).",
+          camera: "ARRI Alexa LF",
+          lenses: "Zeiss Supreme Primes",
+          format: "6K ARRIRAW",
+          duration: "8 Weeks",
+          keyImage:
+            "https://placehold.co/500x750/111111/e0e0e0?text=KEY+SETUP+1",
+          groupPhoto:
+            "Camera Trainee/Different Shores/group 3.JPG", // New Field
+          videoEmbedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0", // Replace with a BTS video reel
+          btsImages: [
+            "Camera Trainee/Different Shores/clapperboard (good).JPG",
+            "Camera Trainee/Different Shores/clapperboard 2.JPG",
+            "Camera Trainee/Different Shores/clapperboard.JPG",
+            "Camera Trainee/Different Shores/on beach set.JPG",
+            "Camera Trainee/Different Shores/on set beach 2.JPG",
+            "Camera Trainee/Different Shores/on set beach 3.JPG",
+            "Camera Trainee/Different Shores/on set beach 4.JPG",
+            "Camera Trainee/Different Shores/on set beach 5.JPG"
+          ],
+        },
+      };
+
+      // --- Lightbox Functions ---
+
+      /**
+       * Opens the lightbox modal with the image corresponding to the given index.
+       * Disables body scrolling.
+       * @param {number} index - The index of the image in the currentImages array.
+       */
+      function openLightbox(index) {
+        if (index < 0 || index >= currentImages.length) return; // Boundary check
+
+        currentIndex = index;
+        const image = currentImages[currentIndex];
+
+        const modal = document.getElementById("lightbox-modal");
+        const img = document.getElementById("lightbox-image");
+        const caption = document.getElementById("lightbox-caption");
+        const prevBtn = document.getElementById("lightbox-prev-btn");
+        const nextBtn = document.getElementById("lightbox-next-btn");
+
+        img.src = image.src;
+        img.alt = image.alt;
+        caption.textContent = image.alt + ` (${currentIndex + 1} of ${currentImages.length})`;
+
+        // Update navigation button visibility
+        prevBtn.style.display = currentIndex > 0 ? "block" : "none";
+        nextBtn.style.display =
+          currentIndex < currentImages.length - 1 ? "block" : "none";
+
+        // Show modal and disable scrolling
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        document.body.style.overflow = "hidden"; // Prevent scrolling background
+      }
+
+      /**
+       * Closes the lightbox modal.
+       * Re-enables body scrolling.
+       */
+      function closeLightbox() {
+        const modal = document.getElementById("lightbox-modal");
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+
+      /** Moves to the previous image in the series. */
+      function showPrev() {
+        if (currentIndex > 0) {
+          openLightbox(currentIndex - 1);
+        }
+      }
+
+      /** Moves to the next image in the series. */
+      function showNext() {
+        if (currentIndex < currentImages.length - 1) {
+          openLightbox(currentIndex + 1);
+        }
+      }
+      
+      /** Handles keyboard events for navigation (ESC and arrows) */
+      function handleKeyDown(event) {
+        // Only navigate if the lightbox is open
+        if (!document.getElementById("lightbox-modal").classList.contains("hidden")) {
+            if (event.key === "ArrowLeft") {
+                showPrev();
+            } else if (event.key === "ArrowRight") {
+                showNext();
+            } else if (event.key === "Escape") {
+                closeLightbox();
+            }
+        }
+      }
+
+      // --- Core Logic ---
+
+      function getTraineeIdFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        // Default to project 1 if no ID is provided, or if ID is invalid
+        const id = parseInt(params.get("id"));
+        return TRAINEE_DATA[id] ? id : 1;
+      }
+
+      function loadProjectDetails(projectId) {
+        const project = TRAINEE_DATA[projectId];
+        if (!project) {
+          document.getElementById("project-title").textContent =
+            "Project Not Found";
+          document.getElementById("project-role").textContent =
+            "Please check the URL.";
+          return;
+        }
+
+        // Update main content
+        document.getElementById("project-title").textContent = project.title;
+        document.getElementById("project-role").textContent = "Camera Trainee Project: " + project.projectType; // Added project type for context
+        document.getElementById("project-challenges").textContent =
+          project.challenges;
+
+        // Update Details (using the hidden elements)
+        try {
+          document.getElementById("project-type").textContent =
+            project.projectType;
+          document.getElementById("project-camera").textContent =
+            project.camera;
+          document.getElementById("project-lenses").textContent =
+            project.lenses;
+          document.getElementById("project-format").textContent =
+            project.format;
+          document.getElementById("project-duration").textContent =
+            project.duration;
+          document.getElementById("project-key-image").src = project.keyImage;
+          document.getElementById("project-video-embed").src =
+            project.videoEmbedUrl;
+        } catch (error) {
+          // console.error("Could not set properties on hidden elements:", error);
+        }
+
+        // --- Populate currentImages array (Gallery Data) ---
+        currentImages = [];
+
+        // 1. Add Group Photo (Index 0)
+        const groupPhotoSrc = project.groupPhoto;
+        const groupPhotoAlt = "The full crew on the final day of shooting.";
+        currentImages.push({ src: groupPhotoSrc, alt: groupPhotoAlt });
+
+        // 2. Add BTS Images (Index 1 onwards)
+        project.btsImages.forEach((src, index) => {
+          const altText = `Set Photo ${index + 1}: Logistics on the set of ${project.title}`;
+          currentImages.push({ src, alt: altText });
+        });
+        // --- End Populate currentImages array ---
+
+        // Update Group Photo and make it clickable for lightbox
+        const groupPhotoElement = document.getElementById("project-group-photo");
+        groupPhotoElement.src = groupPhotoSrc;
+        groupPhotoElement.classList.add("cursor-pointer", "hover:scale-[1.01]", "transition", "duration-300");
+        // Click handler uses index 0
+        groupPhotoElement.onclick = () => openLightbox(0);
+
+        // Update BTS Gallery and make images clickable for lightbox
+        const btsGallery = document.getElementById("bts-gallery");
+        btsGallery.innerHTML = ""; // Clear previous images
+        project.btsImages.forEach((src, index) => {
+          // Calculate the true index in the currentImages array (Group photo is index 0)
+          const trueIndex = 1 + index; 
+          
+          const imgContainer = document.createElement("div");
+          imgContainer.className =
+            "overflow-hidden rounded-xl shadow-xl shadow-red-900/20 transition duration-500 transform hover:scale-[1.02] cursor-pointer";
+          const img = document.createElement("img");
+          img.src = src;
+          const altText = currentImages[trueIndex].alt;
+          img.alt = altText;
+          img.className = "w-full h-full object-cover aspect-[4/3]";
+          
+          // Attach click handler for lightbox, using the calculated index
+          img.onclick = () => openLightbox(trueIndex);
+
+          imgContainer.appendChild(img);
+          btsGallery.appendChild(imgContainer);
+        });
+      }
+
+      // Intersection Observer for fade-in effect
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("section-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      // --- Initialization ---
+
+      window.onload = function () {
+        // Load the correct project details
+        const projectId = getTraineeIdFromUrl();
+        loadProjectDetails(projectId);
+
+        // Observe all sections for fade-in effect
+        document.querySelectorAll(".section-fade").forEach((section) => {
+          observer.observe(section);
+        });
+        
+        // Add keyboard listener for lightbox navigation/close
+        document.addEventListener('keydown', handleKeyDown);
+      };
+    </script>
+  </body>
+</html>
