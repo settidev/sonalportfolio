@@ -4,14 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sonal Arya | Cinematography Portfolio</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Configure Tailwind to use Inter font and a dark theme -->
-    <style>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind to use Inter font and a dark theme --><style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
       body {
         font-family: "Inter", sans-serif;
-        background-color: #050505; /* Even Deeper Dark Background */
+        background-color: transparent; /* Ensure body is transparent to show carousel */
         color: #f5f5f5; /* Near-White Text */
       }
       /* Custom section divider line */
@@ -26,14 +24,14 @@
         margin-right: auto;
       }
 
-      /* --- CAROUSEL STYLES (Fixed Background) --- */
-      #hero-carousel {
+      /* --- CAROUSEL STYLES (Fixed Background for ENTIRE PAGE) --- */
+      #global-carousel {
         position: fixed; /* Keep background fixed for cinematic parallax feel */
         top: 0;
         left: 0;
         width: 100%;
         height: 100vh;
-        z-index: 0;
+        z-index: -1; /* Ensure it stays behind all other content */
       }
       .carousel-image {
         position: absolute;
@@ -59,7 +57,8 @@
         border-radius: 0.75rem;
         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
       }
-      .video-responsive iframe {
+      /* Updated to target video element */
+      .video-responsive video {
         left: 0;
         top: 0;
         height: 100%;
@@ -72,9 +71,11 @@
       .main-content {
         position: relative;
         z-index: 10;
-        background-color: #050505; /* Seamless transition to main background */
+        background-color: transparent; /* Main content wrapper itself is transparent */
+        background-image: none;
+        background-repeat: repeat;
         min-height: 100vh; /* Make sure the content can scroll */
-        padding-top: 100vh; /* Push content down initially */
+        padding-top: 0; /* Ensures content starts immediately after hero section */
       }
       /* Style for initial hero scroll animation */
       #hero-content {
@@ -86,6 +87,9 @@
         opacity: 0;
         transform: translateY(40px); /* Start slightly below final position */
         transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        /* Individual sections now have their own semi-transparent background */
+        background-color: rgba(10, 10, 10, 0.7); /* Dark background with opacity lowered to 0.7 */
+        backdrop-filter: blur(5px); /* Subtle blur effect */
       }
       .fade-section.visible {
         opacity: 1;
@@ -118,8 +122,25 @@
     </style>
   </head>
   <body>
-    <!-- Header & Navigation (Sticky/Fixed) -->
-    <header
+    <!-- Image Carousel Background (FIXED position for ENTIRE PAGE) --><div id="global-carousel">
+      <!-- Replace these placeholder URLs with your public image links --><img
+        src="Film Photography/Flora and Fauna/000040(1).JPG"
+        class="carousel-image active"
+        alt="Cinematic background image 1"
+      />
+      <img
+        src="Film Photography/Flora and Fauna/000048(1).JPG"
+        class="carousel-image"
+        alt="Cinematic background image 2"
+      />
+      <img
+        src="Film Photography/Flora and Fauna/000056(1).JPG"
+        class="carousel-image"
+        alt="Cinematic background image 3"
+      />
+    </div>
+
+    <!-- Header & Navigation (Sticky/Fixed) --><header
       class="sticky top-0 z-50 bg-[#050505] bg-opacity-95 shadow-2xl backdrop-blur-sm border-b border-gray-900/50"
     >
       <div
@@ -132,22 +153,19 @@
           SONAL ARYA
         </a>
         <nav class="flex space-x-6">
-          <!-- Home Link -->
-          <a
+          <!-- Home Link --><a
             href="index.html"
             class="text-sm font-semibold text-red-500 transition duration-300 p-2 rounded-md bg-gray-900/50"
             >Home</a
           >
 
-          <!-- Showreel Link -->
-          <a
+          <!-- Showreel Link --><a
             href="#intro-video"
             class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
             >Showreel</a
           >
 
-          <!-- NEW FLAT LINKS (FORMERLY DROPDOWN) -->
-          <a
+          <!-- NEW FLAT LINKS (FORMERLY DROPDOWN) --><a
             href="films.html"
             class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
             >Films (DOP)</a
@@ -158,8 +176,7 @@
             >Camera Trainee</a
           >
 
-          <!-- Flat Links -->
-          <a
+          <!-- Flat Links --><a
             href="filmphotography.html"
             class="text-sm font-semibold hover:text-red-500 transition duration-300 p-2 rounded-md hover:bg-gray-900/50"
             >Film Photography</a
@@ -173,33 +190,11 @@
       </div>
     </header>
 
-    <!-- Hero Section (Full Screen Introductory Content) -->
-    <section
+    <!-- Hero Section (Full Screen Introductory Content) --><section
       id="hero-section"
       class="relative min-h-screen flex items-center justify-center text-center overflow-hidden"
     >
-      <!-- Image Carousel Background (FIXED position for effect) -->
-      <div id="hero-carousel">
-        <!-- Replace these placeholder URLs with your public image links -->
-        <img
-          src="Film Photography/Flora and Fauna/000040(1).JPG"
-          class="carousel-image active"
-          alt="Cinematic background image 1"
-        />
-        <img
-          src="Film Photography/Flora and Fauna/000048(1).JPG"
-          class="carousel-image"
-          alt="Cinematic background image 2"
-        />
-        <img
-          src="Film Photography/Flora and Fauna/000056(1).JPG"
-          class="carousel-image"
-          alt="Cinematic background image 3"
-        />
-      </div>
-
-      <!-- Text Content Overlay (Will be animated on scroll) -->
-      <div
+      <!-- Text Content Overlay (Will be animated on scroll) --><div
         id="hero-content"
         class="max-w-5xl mx-auto px-6 py-20 relative z-10 text-shadow-lg"
       >
@@ -222,304 +217,318 @@
       </div>
     </section>
 
-    <!-- Main Content Wrapper (Scrolls over the fixed hero background) -->
-    <div class="main-content">
-      <!-- 1. Introductory Video Section (LATEST SHOWREEL) - CORRECTLY FIRST SECTION -->
-      <section
+    <!-- Main Content Wrapper (Now just a container for content sections) --><div class="main-content">
+      <!-- 1. Introductory Video Section (LATEST SHOWREEL) --><section
         id="intro-video"
-        class="pb-0 pt-8 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 fade-section"
+        class="pt-8 pb-16 fade-section"
       >
-        <span class="anchor-padding"></span>
-        <h2 class="section-title text-4xl font-extrabold text-center mb-12">
-          Latest Showreel
-        </h2>
-        <p class="text-center text-gray-400 mb-12 max-w-3xl mx-auto">
-          My most recent compilation of commercial and narrative work,
-          highlighting my distinct visual signature.
-        </p>
-        <div
-          class="bg-[#0f0f0f] p-6 rounded-xl shadow-2xl transition duration-300 hover:shadow-red-500/30"
-        >
-          <div class="video-responsive">
-            <!-- Placeholder for Showreel -->
-            <iframe
-              src="https://drive.google.com/file/d/1dmR9P-Y4oVgmHZkCoWIuniX8CfsHIEFG/preview?mute=1"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen
-            >
-            </iframe>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <span class="anchor-padding"></span>
+          <h2 class="section-title text-4xl font-extrabold text-center mb-12">
+            Latest Showreel
+          </h2>
+          <p class="text-center text-gray-400 mb-12 max-w-3xl mx-auto">
+            My most recent compilation of commercial and narrative work,
+            highlighting my distinct visual signature.
+          </p>
+          <div
+            class="bg-[#0f0f0f] p-6 rounded-xl shadow-2xl transition duration-300 hover:shadow-red-500/30"
+          >
+            <div class="video-responsive">
+              <!-- Replaced iframe with native HTML5 video for scroll control -->
+              <video
+                id="showreel-video"
+                src="Films/Application Portfolio - ITV Technical Traineeship.mp4" 
+                poster="Films/A Game To Remember/Poster.jpeg"
+                controls 
+                muted 
+                playsinline
+                class="absolute w-full h-full object-cover rounded-lg"
+              ></video>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- 2. Films Portfolio Section (DOP Work) -->
-      <section
+      <!-- 2. Films Portfolio Section (DOP Work) --><section
         id="films"
-        class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-900 fade-section"
+        class="py-16 md:py-24 border-t border-gray-900 fade-section"
       >
-        <span class="anchor-padding"></span>
-        <h2 class="section-title text-4xl font-extrabold text-center mb-12">
-          Films (DOP Work)
-        </h2>
-        <p class="text-center text-gray-400 mb-16 max-w-3xl mx-auto">
-          Key projects where I served as the primary Director of Photography,
-          focusing on narrative and commercial mood.
-        </p>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <span class="anchor-padding"></span>
+          <h2 class="section-title text-4xl font-extrabold text-center mb-12">
+            Films (DOP Work)
+          </h2>
+          <p class="text-center text-gray-400 mb-16 max-w-3xl mx-auto">
+            Key projects where I served as the primary Director of Photography,
+            focusing on narrative and commercial mood.
+          </p>
 
-        <!-- Video Embed Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <!-- Video 2: Short Film Clip -->
-            <a href="Film_Details_gametoremb.html">
-          <div
-            class="bg-[#0f0f0f] p-6 rounded-xl shadow-2xl transition duration-300 hover:shadow-red-500/20"
-          >
-            <div class="video-responsive">
-             
-              <img
-                src="Films/A Game To Remember/Poster.jpeg"
-                
-              >
-              </img>
+          <!-- Video Embed Grid --><div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <!-- Video 2: Short Film Clip --><a href="Film_Details_gametoremb.html">
+            <div
+              class="bg-[#0f0f0f] p-6 rounded-xl shadow-2xl transition duration-300 hover:shadow-red-500/20"
+            >
+              <div class="video-responsive">
+              
+                <img
+                  src="Films/A Game To Remember/Poster.jpeg"
+                  
+                >
+                </img>
+              </div>
+              <div class="mt-4">
+                <h3 class="text-2xl font-bold text-red-400">
+                  Short Film: "Game to Remember"
+                </h3>
+                <p class="text-gray-500 text-sm">
+                  A deep dive into low-light cinematography and color grading.
+                </p>
+              </div>
             </div>
-            <div class="mt-4">
-              <h3 class="text-2xl font-bold text-red-400">
-                Short Film: "Game to Remember"
-              </h3>
-              <p class="text-gray-500 text-sm">
-                A deep dive into low-light cinematography and color grading.
-              </p>
+            </a>
+
+            <!-- Video 3: Commercial Project --><a href="Film_Details_theory.html">
+            <div
+              class="bg-[#0f0f0f] p-6 rounded-xl shadow-2xl transition duration-300 hover:shadow-red-500/20"
+            >
+              <div class="video-responsive">
+                <img
+                  src="Films/A Theory of a Molecular Universe/Poster with logo.png"
+                  
+                >
+                </img>
+              </div>
+              <div class="mt-4">
+                <h3 class="text-2xl font-bold text-red-400">
+                  Short Film: "A Theory of a Molecular Universe"
+                </h3>
+                <p class="text-gray-500 text-sm">
+                  High-energy commercial spot for an athletic brand, emphasizing
+                  motion.
+                </p>
+              </div>
             </div>
+            </a>
+
+            <!-- NEW: Additional Video Placeholder --><a href="Film_Details_unb_gap.html">
+            <div
+              class="bg-[#0f0f0f] p-6 rounded-xl shadow-2xl transition duration-300 hover:shadow-red-500/20"
+            >
+              <div class="video-responsive">
+                <img
+                  src="Films/An Unbridgeable Gap/Poster.jpg"
+                  
+                >
+                </img>
+              </div>
+              <div class="mt-4">
+                <h3 class="text-2xl font-bold text-red-400">
+                  Short Film: "An Unbridgeable Gap"
+                </h3>
+                <p class="text-gray-500 text-sm">
+                  Excerpt from a dramatic feature film, utilizing anamorphic
+                  lenses.
+                </p>
+              </div>
+            </div>
+            </a>
+
           </div>
-          </a>
-
-          <!-- Video 3: Commercial Project -->
-           <a href="Film_Details_theory.html">
-          <div
-            class="bg-[#0f0f0f] p-6 rounded-xl shadow-2xl transition duration-300 hover:shadow-red-500/20"
-          >
-            <div class="video-responsive">
-              <img
-                src="Films/A Theory of a Molecular Universe/Poster with logo.png"
-                
-              >
-              </img>
-            </div>
-            <div class="mt-4">
-              <h3 class="text-2xl font-bold text-red-400">
-                Short Film: "A Theory of a Molecular Universe"
-              </h3>
-              <p class="text-gray-500 text-sm">
-                High-energy commercial spot for an athletic brand, emphasizing
-                motion.
-              </p>
-            </div>
-          </div>
-          </a>
-
-          <!-- NEW: Additional Video Placeholder -->
-             <a href="Film_Details_unb_gap.html">
-          <div
-            class="bg-[#0f0f0f] p-6 rounded-xl shadow-2xl transition duration-300 hover:shadow-red-500/20"
-          >
-            <div class="video-responsive">
-              <img
-                src="Films/An Unbridgeable Gap/Poster.jpg"
-                
-              >
-              </img>
-            </div>
-            <div class="mt-4">
-              <h3 class="text-2xl font-bold text-red-400">
-                Short Film: "An Unbridgeable Gap"
-              </h3>
-              <p class="text-gray-500 text-sm">
-                Excerpt from a dramatic feature film, utilizing anamorphic
-                lenses.
-              </p>
-            </div>
-          </div>
-          </a>
-
         </div>
       </section>
 
    
 
-      <!-- 4. Photography Stills Section - MOVED DOWN HERE -->
-      <section
+      <!-- 4. Photography Stills Section --><section
         id="photos"
-        class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-900 fade-section"
+        class="py-16 md:py-24 border-t border-gray-900 fade-section"
       >
-        <span class="anchor-padding"></span>
-        <h2 class="section-title text-4xl font-extrabold text-center mb-12">
-          Film Photography & Stills
-        </h2>
-        <p class="text-center text-gray-400 mb-16 max-w-3xl mx-auto">
-          A curated selection of frame-grabs and onset photography, showcasing
-          composition, lighting, and my analog film work.
-        </p>
-
-        <!-- Photo Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-          <!-- Photo 1 -->
-          <div
-            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
-            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 0)"
-          >
-            <img
-              src="Film Photography/Flora and Fauna/000007.JPG"
-              alt="Still image showcasing deep shadows"
-              class="w-full h-auto object-cover aspect-[3/2] transition-all duration-700 group-hover:scale-110 group-hover:opacity-90"
-            />
-          </div>
-
-          <!-- Photo 2 -->
-          <div
-            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
-            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 1)"
-          >
-            <img
-              src="Film Photography/Flora and Fauna/000020.JPG"
-              alt="Still image showcasing wide composition"
-              class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
-            />
-          </div>
-
-          <!-- Photo 3 -->
-          <div
-            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
-            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 2)"
-          >
-            <img
-              src="Film Photography/Flora and Fauna/000026.JPG"
-              alt="Still image showcasing color palette"
-              class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
-            />
-          </div>
-
-          <!-- Photo 4 -->
-          <div
-            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
-            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 3)"
-          >
-            <img
-              src="Film Photography/Flora and Fauna/000040(1).JPG"
-              alt="Still image showcasing high contrast"
-              class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
-            />
-          </div>
-
-          <!-- NEW: Additional Photo Placeholders -->
-          <div
-            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
-            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 4)"
-          >
-            <img
-              src="Film Photography/Flora and Fauna/000044(1).JPG"
-              alt="Analog film shot 1"
-              class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
-            />
-          </div>
-          <div
-            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
-            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 5)"
-          >
-            <img
-              src="Film Photography/Flora and Fauna/000044(2).JPG"
-              alt="Analog film shot 2"
-              class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
-            />
-          </div>
-          <div
-            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
-            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 6)"
-          >
-            <img
-              src="Film Photography/Flora and Fauna/000047.JPG"
-              alt="Behind the scenes photo"
-              class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
-            />
-          </div>
-          <div
-            class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
-            onclick="openLightbox(PHOTOGRAPHY_GALLERY, 7)"
-          >
-            <img
-              src="Film Photography/Flora and Fauna/000048(1).JPG"
-              alt="Behind the scenes photo"
-              class="w-full h-auto object-cover aspect-[3/2] transition duration-300 transform hover:scale-[1.02]"
-            />
-          </div>
-        </div>
-      </section>
-      <!-- 5. Contact Section -->
-      <section
-        id="contact"
-        class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-900 fade-section"
-      >
-        <span class="anchor-padding"></span>
-        <h2 class="section-title text-4xl font-extrabold text-center mb-12">
-          Contact & Resume
-        </h2>
-
-        <div
-          class="max-w-xl mx-auto text-center bg-[#0f0f0f] p-10 rounded-xl shadow-2xl border border-gray-800"
-        >
-          <p class="text-gray-400 mb-8 text-xl">
-            I'm actively seeking new projects, both narrative and commercial.
-            Please feel free to reach out directly.
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <span class="anchor-padding"></span>
+          <h2 class="section-title text-4xl font-extrabold text-center mb-12">
+            Film Photography & Stills
+          </h2>
+          <p class="text-center text-gray-400 mb-16 max-w-3xl mx-auto">
+            A curated selection of frame-grabs and onset photography, showcasing
+            composition, lighting, and my analog film work.
           </p>
 
-          <!-- RESUME DOWNLOAD BUTTON -->
-          <a
-            href="path/to/Sonal_Arya_Cinematography_Resume.pdf"
-            download
-            class="inline-flex items-center justify-center w-full px-6 py-4 text-lg font-bold rounded-lg text-white bg-red-500 hover:bg-red-600 transition duration-300 transform hover:scale-[1.01] shadow-lg shadow-red-500/50 mb-8"
-          >
-            Download Full Resume (PDF)
-          </a>
-
-          <!-- CONTACT DETAILS -->
-          <div class="space-y-4 pt-4 border-t border-gray-700">
-            <h3 class="text-3xl font-bold text-red-500 pt-4">Direct Contact</h3>
-            <a
-              href="mailto:sonal.arya@example.com"
-              class="block text-xl font-medium text-white hover:text-red-400 transition"
+          <!-- Photo Grid --><div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Photo 1 --><div
+              class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+              onclick="openLightbox(PHOTOGRAPHY_GALLERY, 0)"
             >
-              sonal.arya@example.com
-            </a>
-            <p class="text-gray-500">Based in [Your City, Country]</p>
+              <img
+                src="Film Photography/Flora and Fauna/000007.JPG"
+                alt="Still image showcasing deep shadows"
+                class="w-full h-auto object-cover aspect-[3/2] transition-all duration-700 group-hover:scale-110 group-hover:opacity-90"
+              />
+            </div>
+
+            <!-- Photo 2 --><div
+              class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+              onclick="openLightbox(PHOTOGRAPHY_GALLERY, 1)"
+            >
+              <img
+                src="Film Photography/Flora and Fauna/000020.JPG"
+                alt="Still image showcasing wide composition"
+                class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
+              />
+            </div>
+
+            <!-- Photo 3 --><div
+              class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+              onclick="openLightbox(PHOTOGRAPHY_GALLERY, 2)"
+            >
+              <img
+                src="Film Photography/Flora and Fauna/000026.JPG"
+                alt="Still image showcasing color palette"
+                class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
+              />
+            </div>
+
+            <!-- Photo 4 --><div
+              class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+              onclick="openLightbox(PHOTOGRAPHY_GALLERY, 3)"
+            >
+              <img
+                src="Film Photography/Flora and Fauna/000040(1).JPG"
+                alt="Still image showcasing high contrast"
+                class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
+              />
+            </div>
+
+            <!-- NEW: Additional Photo Placeholders --><div
+              class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+              onclick="openLightbox(PHOTOGRAPHY_GALLERY, 4)"
+            >
+              <img
+                src="Film Photography/Flora and Fauna/000044(1).JPG"
+                alt="Analog film shot 1"
+                class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
+              />
+            </div>
+            <div
+              class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+              onclick="openLightbox(PHOTOGRAPHY_GALLERY, 5)"
+            >
+              <img
+                src="Film Photography/Flora and Fauna/000044(2).JPG"
+                alt="Analog film shot 2"
+                class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
+              />
+            </div>
+            <div
+              class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+              onclick="openLightbox(PHOTOGRAPHY_GALLERY, 6)"
+            >
+              <img
+                src="Film Photography/Flora and Fauna/000047.JPG"
+                alt="Behind the scenes photo"
+                class="w-full h-auto object-cover aspect-[3/2] transition duration-500 group-hover:opacity-80"
+              />
+            </div>
+            <div
+              class="rounded-xl overflow-hidden shadow-2xl group cursor-pointer border border-gray-800 hover:border-red-500 transition-all duration-500 transform hover:scale-105 hover:z-20 hover:shadow-2xl hover:shadow-red-500/20"
+              onclick="openLightbox(PHOTOGRAPHY_GALLERY, 7)"
+            >
+              <img
+                src="Film Photography/Flora and Fauna/000048(1).JPG"
+                alt="Behind the scenes photo"
+                class="w-full h-auto object-cover aspect-[3/2] transition duration-300 transform hover:scale-[1.02]"
+              />
+            </div>
           </div>
+        </div>
+      </section>
+      <!-- 5. Contact Section --><section
+        id="contact"
+        class="py-16 md:py-24 border-t border-gray-900 fade-section"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <span class="anchor-padding"></span>
+          <h2 class="section-title text-4xl font-extrabold text-center mb-12">
+            Resume & Contact
+          </h2>
 
-          <!-- SOCIAL MEDIA LINKS -->
-          <div class="mt-10 space-x-6 text-xl flex justify-center">
-            <a
-              href="#"
-              class="text-gray-400 hover:text-red-500 transition duration-300 transform hover:scale-110"
-              title="IMDb Profile"
-            >
-              IMDb
-            </a>
-            <a
-              href="#"
-              class="text-gray-400 hover:text-red-500 transition duration-300 transform hover:scale-110"
-              title="Instagram"
-            >
-              Instagram
-            </a>
-            <a
-              href="#"
-              class="text-gray-400 hover:text-red-500 transition duration-300 transform hover:scale-110"
-              title="LinkedIn Profile"
-            >
-              LinkedIn
-            </a>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+            
+            <!-- Left Column: Contact and Download -->
+            <div class="lg:col-span-1 text-center lg:text-left bg-[#0f0f0f] p-8 rounded-xl shadow-2xl border border-gray-800">
+                <p class="text-gray-400 mb-8 text-xl">
+                  I'm actively seeking new projects, both narrative and commercial.
+                  Please feel free to reach out directly.
+                </p>
+                
+                <!-- CONTACT DETAILS -->
+                <div class="space-y-4 pt-4 border-t border-gray-700">
+                  <h3 class="text-3xl font-bold text-red-500 pt-4">Direct Contact</h3>
+                  <a
+                    href="mailto:sonal.arya@example.com"
+                    class="block text-xl font-medium text-white hover:text-red-400 transition"
+                  >
+                    sonal.arya@example.com
+                  </a>
+                  <p class="text-gray-500">Based in [Your City, Country]</p>
+                </div>
+
+                <!-- RESUME DOWNLOAD BUTTON -->
+                <a
+                  href="path/to/Sonal_Arya_Cinematography_Resume.pdf"
+                  download
+                  class="inline-flex items-center justify-center w-full mt-10 px-6 py-4 text-lg font-bold rounded-lg text-white bg-red-500 hover:bg-red-600 transition duration-300 transform hover:scale-[1.01] shadow-lg shadow-red-500/50"
+                >
+                  Download Resume (PDF)
+                </a>
+
+                <!-- SOCIAL MEDIA LINKS -->
+                <div class="mt-10 space-x-6 text-xl flex justify-center lg:justify-start">
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-red-500 transition duration-300 transform hover:scale-110"
+                    title="IMDb Profile"
+                  >
+                    IMDb
+                  </a>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-red-500 transition duration-300 transform hover:scale-110"
+                    title="Instagram"
+                  >
+                    Instagram
+                  </a>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-red-500 transition duration-300 transform hover:scale-110"
+                    title="LinkedIn Profile"
+                  >
+                    LinkedIn
+                  </a>
+                </div>
+            </div>
+
+            <!-- Right Column: PDF Resume Viewer -->
+            <div class="lg:col-span-2 bg-[#0f0f0f] p-4 rounded-xl shadow-2xl border border-gray-800 aspect-[1/1.414] min-h-[70vh] lg:min-h-[80vh] flex flex-col">
+                <h3 class="text-2xl font-bold text-red-400 mb-4 text-center">View Resume</h3>
+                <!-- Note: The PDF path must be accessible in your environment for the iframe to load. 
+                     The #toolbar=0&navpanes=0 arguments attempt to hide the PDF viewer's internal UI, 
+                     forcing the user to use your external Download button. -->
+                <iframe 
+                    src="SatveerSingh.pdf" 
+                    class="w-full h-full rounded-lg"
+                    
+                    title="Sonal Arya Resume Viewer"
+                >
+                  <p class="text-gray-400 p-4 text-center">Your browser does not support viewing PDFs directly. Please use the download button on the left.</p>
+                </iframe>
+            </div>
+            
           </div>
         </div>
       </section>
 
-      <!-- Footer -->
-      <footer class="bg-[#0f0f0f] py-6 mt-12 border-t border-gray-900">
+      <!-- Footer --><footer class="bg-[#0f0f0f] py-6 mt-12 border-t border-gray-900">
         <div
           class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600 text-sm"
         >
@@ -528,8 +537,7 @@
       </footer>
     </div>
 
-    <!-- JavaScript for Image Carousel, Hero Scroll Animation, and Section Fade-In -->
-    <script>
+    <!-- JavaScript for Image Carousel, Hero Scroll Animation, and Section Fade-In --><script>
       // --- Global State for Lightbox (NEW) ---
       const PHOTOGRAPHY_GALLERY = [
         'Film Photography/Flora and Fauna/000007.JPG',
@@ -685,10 +693,40 @@
           }
         });
       });
+      
+      // --- Video Playback on Scroll Logic (NEW) ---
+      const showreelVideo = document.getElementById('showreel-video');
+      if (showreelVideo) {
+          const videoObserver = new IntersectionObserver(
+              (entries) => {
+                  entries.forEach(entry => {
+                      if (entry.isIntersecting) {
+                          // Start playing when video enters viewport
+                          showreelVideo.play().catch(error => {
+                              // Catch potential playback errors (e.g., policy blocks)
+                              console.error("Video playback failed:", error);
+                          });
+                      } else {
+                          // Pause when video leaves viewport
+                          showreelVideo.pause();
+                      }
+                  });
+              }, 
+              {
+                  root: null, // viewport
+                  rootMargin: "0px",
+                  // Trigger when 60% of video is visible
+                  threshold: 0.6 
+              }
+          );
+
+          // Start observing the video element
+          videoObserver.observe(showreelVideo);
+      }
+      // --- End Video Playback on Scroll Logic ---
     </script>
 
-    <!-- Lightbox Structure (UPDATED) -->
-    <div
+    <!-- Lightbox Structure (UPDATED) --><div
       id="lightbox"
       class="fixed inset-0 bg-black/90 hidden justify-center items-center z-[9999]"
       onclick="if(event.target === this) closeLightbox()"
@@ -696,8 +734,7 @@
       <div
         class="relative w-full h-full flex justify-center items-center"
       >
-        <!-- Close Button -->
-        <button
+        <!-- Close Button --><button
           onclick="closeLightbox()"
           class="absolute top-4 right-4 text-white text-3xl p-2 rounded-full bg-black/50 hover:bg-red-500 transition duration-300 z-[10001] shadow-lg"
           aria-label="Close Lightbox"
@@ -705,8 +742,7 @@
           &times;
         </button>
 
-        <!-- Previous Button -->
-        <button
+        <!-- Previous Button --><button
           id="prev-btn"
           onclick="prevImage()"
           class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl p-4 rounded-full bg-black/50 hover:bg-red-500 transition duration-300 z-[10001] disabled:opacity-30 disabled:cursor-not-allowed lightbox-btn"
@@ -715,8 +751,7 @@
           &#10094;
         </button>
 
-        <!-- Image Container -->
-        <img
+        <!-- Image Container --><img
           id="lightbox-img"
           src=""
           alt="Expanded image"
@@ -724,8 +759,7 @@
           onclick="event.stopPropagation()"
         />
 
-        <!-- Next Button -->
-        <button
+        <!-- Next Button --><button
           id="next-btn"
           onclick="nextImage()"
           class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl p-4 rounded-full bg-black/50 hover:bg-red-500 transition duration-300 z-[10001] disabled:opacity-30 disabled:cursor-not-allowed lightbox-btn"
@@ -734,8 +768,7 @@
           &#10095;
         </button>
 
-        <!-- Index Counter -->
-        <div id="lightbox-counter" class="absolute bottom-4 text-white text-lg font-semibold bg-black/50 px-4 py-2 rounded-lg shadow-xl">
+        <!-- Index Counter --><div id="lightbox-counter" class="absolute bottom-4 text-white text-lg font-semibold bg-black/50 px-4 py-2 rounded-lg shadow-xl">
           1 of 1
         </div>
       </div>
