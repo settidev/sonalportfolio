@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -42,7 +42,9 @@
       .section-fade {
         opacity: 0;
         transform: translateY(20px);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        transition:
+          opacity 0.8s ease-out,
+          transform 0.8s ease-out;
       }
       .section-visible {
         opacity: 1;
@@ -112,7 +114,8 @@
         </h1>
         <div class="max-w-4xl">
           <p class="text-gray-300 text-lg leading-relaxed">
-            Assisted the camera department in rigging, de-rigging, battery tracking, cable management, clapboard handling etc.
+            Assisted the camera department in rigging, de-rigging, battery
+            tracking, cable management, clapboard handling etc.
           </p>
         </div>
       </section>
@@ -169,7 +172,7 @@
       <div
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600 text-sm"
       >
-        &copy; 2025 Sonal Arya. Cinematography Portfolio.
+        &copy; 2026 Sonal Arya. Cinematography Portfolio.
       </div>
     </footer>
 
@@ -186,7 +189,7 @@
             }
           });
         },
-        { threshold: 0.1 }
+        { threshold: 0.1 },
       );
 
       // Initialize observation on load
